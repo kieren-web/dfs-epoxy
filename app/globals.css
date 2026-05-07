@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --dfs-purple: #7B35CC;
+  --dfs-magenta: #D4187A;
+  --dfs-orange: #F05A28;
+  --dfs-gold: #C9A870;
+  --dfs-bg: #181818;
+  --dfs-surface: #222222;
+  --dfs-border: #333333;
+  --background: #181818;
+  --foreground: #ffffff;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--dfs-bg);
+  color: #ffffff;
+  font-family: var(--font-inter, Inter, Arial, sans-serif);
 }
+
+html { scroll-behavior: smooth; }
+
+/* ── Gradient utilities ─────────────────────────────────────────────────── */
+.dfs-gradient {
+  background: linear-gradient(135deg, var(--dfs-purple), var(--dfs-magenta), var(--dfs-orange));
+}
+.dfs-gradient-text {
+  background: linear-gradient(135deg, var(--dfs-purple), var(--dfs-magenta), var(--dfs-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.dfs-btn {
+  background: linear-gradient(135deg, var(--dfs-purple), var(--dfs-magenta), var(--dfs-orange));
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
+  display: inline-block;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.dfs-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.dfs-btn:active { transform: translateY(0); }
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #181818; }
+::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+/* ── Hero load animations ───────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.hero-badge   { animation: fadeInDown  0.5s ease-out 0.1s  both; }
+.hero-h1      { animation: fadeInUp    0.6s ease-out 0.2s  both; }
+.hero-sub     { animation: fadeInUp    0.6s ease-out 0.35s both; }
+.hero-bullets { animation: fadeInUp    0.6s ease-out 0.5s  both; }
+.hero-cta     { animation: fadeInUp    0.6s ease-out 0.6s  both; }
+.hero-form    { animation: fadeInRight 0.7s ease-out 0.3s  both; }
+
+/* ── Scroll-triggered reveal ────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+.stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.12s; }
+.stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.19s; }
+.stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.26s; }
+.stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.33s; }
+.stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.40s; }
+
+.safe-area-pb { padding-bottom: env(safe-area-inset-bottom, 0px); }

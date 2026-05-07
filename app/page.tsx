@@ -1,65 +1,67 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Script from "next/script";
+import { localBusinessSchema, faqPageSchema } from "@/lib/schema";
+import HomePageClient from "./HomePageClient";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Epoxy Flooring Central Coast | Dynamic Flooring Solutions",
+  description:
+    "High-performance epoxy flooring systems for warehouses, commercial kitchens, workshops, and garages on the Central Coast NSW. Owner-operated by Carl & Santiago. 500+ floors installed. Free quotes.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Epoxy Flooring Central Coast | Dynamic Flooring Solutions",
+    description:
+      "Central Coast's commercial epoxy specialists. Owner-operated, 500+ floors, warehouses, kitchens, workshops, garages. Free quotes.",
+    type: "website",
+  },
+};
+
+const FAQS = [
+  {
+    question: "How much does epoxy flooring cost on the Central Coast?",
+    answer:
+      "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $50–$80 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes — the price we quote is the price you pay, no variations on the day.",
+  },
+  {
+    question: "How long does epoxy flooring last?",
+    answer:
+      "A properly installed commercial-grade epoxy system lasts 10–20 years with standard maintenance. The key is surface preparation and using the right product for the environment. Cheap coatings applied without proper prep typically fail in 2–3 years.",
+  },
+  {
+    question: "Can you install epoxy in a working warehouse or business?",
+    answer:
+      "Yes. We plan around your operations and can stage the work in sections to minimise disruption. We've worked in live commercial kitchens, active warehouses, and busy workshops.",
+  },
+  {
+    question: "Is epoxy flooring slippery?",
+    answer:
+      "Standard high-gloss epoxy can be slippery when wet. We add anti-slip aggregate to all commercial and wet-area work as standard practice. Slip resistance ratings are available on request.",
+  },
+  {
+    question: "How long does installation take?",
+    answer:
+      "A residential double garage takes 1–2 days. Commercial jobs vary — we'll confirm timeframes in your quote. You can typically walk on the surface within 24 hours and return to full commercial use within 72 hours.",
+  },
+  {
+    question: "Do you offer a warranty?",
+    answer:
+      "Yes. Warranty terms are confirmed at quote stage and depend on the system installed and the environment. We use commercial-grade materials and follow manufacturer installation specs on every job.",
+  },
+];
+
+export default function HomePage() {
+  const lbSchema  = localBusinessSchema();
+  const faqSchema = faqPageSchema(FAQS);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <Script id="schema-lb" type="application/ld+json" strategy="beforeInteractive">
+        {JSON.stringify(lbSchema)}
+      </Script>
+      <Script id="schema-faq" type="application/ld+json" strategy="beforeInteractive">
+        {JSON.stringify(faqSchema)}
+      </Script>
+      <HomePageClient />
+    </>
   );
 }
