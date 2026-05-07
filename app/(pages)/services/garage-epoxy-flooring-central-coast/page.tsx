@@ -42,7 +42,7 @@ const features = [
 const faqs = [
   {
     q: "How much does garage epoxy flooring cost on the Central Coast?",
-    a: "Residential double garages typically start from $50–$80 per m² for a full broadcast flake system. Price depends on the floor size, existing condition, and system chosen. We provide free, fixed-price quotes — the price we quote is the price you pay.",
+    a: "Residential double garages typically start from $90–$100 per m² for a full broadcast flake system. Price depends on the floor size, existing condition, and system chosen. We provide free, fixed-price quotes — the price we quote is the price you pay.",
   },
   {
     q: "What's the best epoxy system for a residential garage?",

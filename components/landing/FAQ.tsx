@@ -5,7 +5,7 @@ import { useInView } from "@/hooks/useInView";
 const FAQS = [
   {
     question: "How much does epoxy flooring cost on the Central Coast?",
-    answer: "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $50–$80 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes — the price we quote is the price you pay, no variations on the day.",
+    answer: "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $90–$100 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes — the price we quote is the price you pay, no variations on the day.",
   },
   {
     question: "How long does epoxy flooring last?",
