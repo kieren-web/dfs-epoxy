@@ -62,7 +62,7 @@ export default function Hero({ attribution }: HeroProps) {
           {/* H1 */}
           <h1 className="hero-h1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold leading-tight tracking-tight mb-5">
             High-Performance Epoxy Flooring for{" "}
-            <span className="dfs-gradient-text">Commercial & Industrial</span>{" "}
+            <span className="dfs-gradient-text">Commercial & Residential</span>{" "}
             Environments
           </h1>
 
