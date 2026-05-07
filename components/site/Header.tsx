@@ -7,9 +7,18 @@ import { PHONE_NUMBER, PHONE_HREF, BUSINESS_NAME } from "@/lib/config";
 import { trackClickCall } from "@/lib/analytics";
 
 const NAV_LINKS = [
-  { label: "Commercial", href: "/#services" },
-  { label: "Residential", href: "/#residential" },
-  { label: "Process", href: "/#process" },
+  { label: "Commercial", href: "/services/commercial-epoxy-flooring-central-coast" },
+  { label: "Residential", href: "/services/residential-epoxy-flooring-central-coast" },
+  { label: "Blog", href: "/blog" },
+  { label: "Reviews", href: "/#reviews" },
+];
+
+const MOBILE_LINKS = [
+  { label: "Commercial Epoxy Flooring", href: "/services/commercial-epoxy-flooring-central-coast" },
+  { label: "Residential Epoxy Flooring", href: "/services/residential-epoxy-flooring-central-coast" },
+  { label: "Warehouse Flooring", href: "/services/warehouse-epoxy-flooring-central-coast" },
+  { label: "Garage Epoxy Flooring", href: "/services/garage-epoxy-flooring-central-coast" },
+  { label: "Blog & Guides", href: "/blog" },
   { label: "Reviews", href: "/#reviews" },
 ];
 
@@ -77,13 +86,25 @@ export default function Header() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[#222222] border-t border-[#333333] px-4 py-4 space-y-1">
-          {NAV_LINKS.map((l) => (
+        <div className="md:hidden bg-[#222222] border-t border-[#333333] px-4 py-4">
+          <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-1">Services</p>
+          {MOBILE_LINKS.slice(0, 4).map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              className="block py-2.5 text-base font-medium text-gray-300 hover:text-white border-b border-[#333333]"
+              className="block py-2.5 text-sm font-medium text-gray-300 hover:text-white border-b border-[#2a2a2a] px-1"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mt-4 mb-3 px-1">Resources</p>
+          {MOBILE_LINKS.slice(4).map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setMenuOpen(false)}
+              className="block py-2.5 text-sm font-medium text-gray-300 hover:text-white border-b border-[#2a2a2a] px-1"
             >
               {l.label}
             </Link>
@@ -91,7 +112,7 @@ export default function Header() {
           <a
             href={PHONE_HREF}
             onClick={() => { trackClickCall("header-mobile"); setMenuOpen(false); }}
-            className="flex items-center gap-2 pt-3 text-base font-bold text-white"
+            className="flex items-center gap-2 pt-4 text-base font-bold text-white px-1"
           >
             <PhoneIcon />
             {PHONE_NUMBER}
