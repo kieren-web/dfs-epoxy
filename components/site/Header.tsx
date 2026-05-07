@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
-import { PHONE_NUMBER, PHONE_HREF, BUSINESS_SHORT, BUSINESS_NAME } from "@/lib/config";
+import { PHONE_NUMBER, PHONE_HREF, BUSINESS_NAME } from "@/lib/config";
 import { trackClickCall } from "@/lib/analytics";
 
 const NAV_LINKS = [
@@ -21,11 +22,13 @@ export default function Header() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-          <div className="relative">
-            <span className="w-9 h-9 rounded-lg dfs-gradient flex items-center justify-center font-black text-white text-base leading-none">
-              {BUSINESS_SHORT}
-            </span>
-          </div>
+          <Image
+            src="/images/logo.png"
+            alt={`${BUSINESS_NAME} logo`}
+            width={40}
+            height={40}
+            className="rounded-lg"
+          />
           <span className="font-bold text-white text-sm leading-tight hidden sm:block">
             {BUSINESS_NAME}<br />
             <span className="text-gray-400 font-normal text-xs">Epoxy Flooring Specialists</span>
