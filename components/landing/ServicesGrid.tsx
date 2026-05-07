@@ -1,26 +1,26 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useInView } from "@/hooks/useInView";
 
 const COMMERCIAL = [
   {
-    title: "Warehouse Epoxy Flooring",
-    desc: "Heavy-duty seamless epoxy systems built for forklifts, pallet jacks, and constant foot traffic. Chemical-resistant, slip-resistant, easy to clean.",
+    title: "Warehouses & Industrial",
+    desc: "Heavy-duty seamless systems built for forklifts, pallet jacks, and constant foot traffic. Chemical-resistant, slip-resistant, easy to clean.",
     icon: "🏭",
   },
   {
-    title: "Commercial Kitchen Flooring",
-    desc: "Hygiene-grade epoxy coatings with anti-slip, chemical-resistant surfaces. Meets food safety requirements. Designed for hot environments and daily cleaning.",
+    title: "Commercial Kitchens",
+    desc: "Hygiene-grade coatings with anti-slip, chemical-resistant surfaces. Meets food safety requirements. Built for hot environments and daily cleaning.",
     icon: "🍳",
   },
   {
-    title: "Workshop & Industrial Flooring",
-    desc: "Hard-wearing epoxy systems for mechanics workshops, manufacturing floors, and industrial spaces. Oil-resistant, impact-resistant, built to last.",
+    title: "Workshops & Mechanics",
+    desc: "Hard-wearing systems for mechanics, manufacturing floors, and trade workshops. Oil-resistant, impact-resistant, built to last.",
     icon: "🔧",
   },
   {
-    title: "Brewery & Hospitality Flooring",
+    title: "Breweries & Hospitality",
     desc: "Specialist coatings for breweries, bars, and hospitality venues. Slip-resistant, easy to sanitise, built for wet environments.",
     icon: "🍺",
   },
@@ -28,14 +28,24 @@ const COMMERCIAL = [
 
 const RESIDENTIAL = [
   {
-    title: "Garage Epoxy Flooring",
-    desc: "Transform your garage with a durable, easy-clean flake epoxy system. Looks great, handles the load, built to last.",
+    title: "Garages",
+    desc: "Durable flake epoxy systems that handle vehicle traffic, oil spills, and hot tyres. Looks great, easy to clean, built to last.",
     icon: "🚗",
   },
   {
-    title: "Interior Epoxy Flooring",
-    desc: "Seamless interior floors for living areas, showrooms, and studios. Modern finish with lasting durability.",
-    icon: "🏠",
+    title: "Driveways & Patios",
+    desc: "Tough outdoor coatings that handle UV, rain, and foot traffic. Transform your outdoor concrete into a clean, durable surface.",
+    icon: "🏡",
+  },
+  {
+    title: "Interior Floors",
+    desc: "Seamless epoxy floors for living areas, showrooms, and studios. Modern finish with lasting durability.",
+    icon: "🛋️",
+  },
+  {
+    title: "Any Concrete Surface",
+    desc: "If it's concrete, we can coat it. Not sure if your job qualifies? Give us a call - we'll tell you straight.",
+    icon: "📐",
   },
 ];
 
@@ -51,21 +61,21 @@ export default function ServicesGrid() {
             Our Services
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Epoxy Flooring Systems Built for the Job
+            Commercial Experts. Residential Too.
           </h2>
-          <p className="mt-3 text-gray-400 max-w-xl mx-auto">
-            Commercial work is our specialty. Residential is where we started.
+          <p className="mt-3 text-gray-400 max-w-2xl mx-auto">
+            We specialise in high-traffic commercial environments - but we coat any concrete surface. Garages, patios, driveways, workshops, kitchens, warehouses. If it's concrete, we can help.
           </p>
         </div>
 
-        {/* Commercial - primary */}
+        {/* Commercial */}
         <div className="mb-4">
           <div className="flex items-center gap-3 mb-5">
             <span
               className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
               style={{background: "linear-gradient(135deg, rgba(123,53,204,0.3), rgba(212,24,122,0.3))", color: "#D4187A", border: "1px solid #D4187A"}}
             >
-              Commercial Priority
+              Commercial
             </span>
             <div className="flex-1 h-px bg-[#333333]" />
           </div>
@@ -87,7 +97,7 @@ export default function ServicesGrid() {
           </div>
         </div>
 
-        {/* Residential - secondary */}
+        {/* Residential */}
         <div id="residential" className="pt-8">
           <div className="flex items-center gap-3 mb-5">
             <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full text-gray-400 border border-[#444]">
@@ -95,7 +105,7 @@ export default function ServicesGrid() {
             </span>
             <div className="flex-1 h-px bg-[#333333]" />
           </div>
-          <div ref={residentialAnim.ref} className={`grid sm:grid-cols-2 gap-5 stagger ${residentialAnim.isVisible ? "visible" : ""}`}>
+          <div ref={residentialAnim.ref} className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger ${residentialAnim.isVisible ? "visible" : ""}`}>
             {RESIDENTIAL.map((s) => (
               <div key={s.title} className="bg-[#222222] border border-[#333333] rounded-2xl p-6 hover:border-[#555] transition-colors">
                 <div className="text-3xl mb-3">{s.icon}</div>
