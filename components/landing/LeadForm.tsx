@@ -5,13 +5,25 @@ import { API_ROUTE, PHONE_NUMBER, PHONE_HREF } from "@/lib/config";
 import { trackFormStep1Complete, trackFormSubmitSuccess, trackClickCall } from "@/lib/analytics";
 import type { Attribution } from "@/hooks/useAttribution";
 
-const SERVICES = [
-  "Warehouse Epoxy Flooring",
-  "Commercial Kitchen Flooring",
-  "Workshop / Industrial Flooring",
-  "Brewery / Hospitality Flooring",
-  "Garage Epoxy Flooring",
-  "Other / Not Sure Yet",
+const SPACE_TYPES = [
+  "Commercial Space",
+  "Residential Space",
+];
+
+const SURFACES = [
+  "Concrete",
+  "Tiles",
+  "Timber / Wood",
+  "Existing Epoxy / Coating",
+  "Other / Not Sure",
+];
+
+const FLOOR_SIZES = [
+  "Under 20m²",
+  "20 - 50m²",
+  "50 - 100m²",
+  "100 - 500m²",
+  "500m² +",
 ];
 
 const BEST_TIMES = [
@@ -26,6 +38,8 @@ type Status = "idle" | "submitting" | "success" | "error";
 
 interface FormData {
   service: string;
+  surface: string;
+  floorSize: string;
   suburb: string;
   firstName: string;
   lastName: string;
@@ -47,8 +61,9 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
   const fieldId = useId();
 
   const [data, setData] = useState<FormData>({
-    service: "", suburb: "", firstName: "", lastName: "",
-    mobile: "", email: "", bestTime: "asap", honeypot: "",
+    service: "", surface: "", floorSize: "", suburb: "",
+    firstName: "", lastName: "", mobile: "", email: "",
+    bestTime: "asap", honeypot: "",
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
 
@@ -59,8 +74,10 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
 
   function validateStep1(): boolean {
     const e: Partial<Record<keyof FormData, string>> = {};
-    if (!data.service)              e.service = "Please select a service.";
-    if (!data.suburb.trim())        e.suburb  = "Please enter your suburb.";
+    if (!data.service)              e.service   = "Please select a space type.";
+    if (!data.surface)              e.surface   = "Please select a floor surface.";
+    if (!data.floorSize)            e.floorSize = "Please select an approximate size.";
+    if (!data.suburb.trim())        e.suburb    = "Please enter your suburb.";
     else if (/^\d+$/.test(data.suburb.trim())) e.suburb = "Please enter a suburb name, not a postcode.";
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -99,7 +116,8 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service: data.service, suburb: data.suburb,
+          service: data.service, surface: data.surface,
+          floor_size: data.floorSize, suburb: data.suburb,
           first_name: data.firstName, last_name: data.lastName,
           mobile: data.mobile, email: data.email,
           best_time: data.bestTime, honeypot: data.honeypot,
@@ -167,19 +185,53 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
         {step === 1 && (
           <>
             <div>
-              <label htmlFor={`${fieldId}-service`} className="block text-sm font-semibold text-gray-300 mb-1">
-                What type of flooring? <span className="text-red-400">*</span>
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
+                Type of space <span className="text-red-400">*</span>
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {SPACE_TYPES.map((s) => (
+                  <label
+                    key={s}
+                    className={`flex items-center gap-2 border rounded-lg px-3 py-2.5 cursor-pointer text-sm transition-colors ${data.service === s ? "border-purple-500 bg-purple-900/20 text-white font-semibold" : "border-[#444] text-gray-400 hover:border-[#666]"}`}
+                  >
+                    <input type="radio" name="service" value={s} checked={data.service === s} onChange={() => set("service", s)} className="accent-purple-500" />
+                    {s}
+                  </label>
+                ))}
+              </div>
+              {errors.service && <p className="text-red-400 text-xs mt-1">{errors.service}</p>}
+            </div>
+
+            <div>
+              <label htmlFor={`${fieldId}-surface`} className="block text-sm font-semibold text-gray-300 mb-1">
+                Current floor surface <span className="text-red-400">*</span>
               </label>
               <select
-                id={`${fieldId}-service`}
-                value={data.service}
-                onChange={(e) => set("service", e.target.value)}
-                className={inputClass("service")}
+                id={`${fieldId}-surface`}
+                value={data.surface}
+                onChange={(e) => set("surface", e.target.value)}
+                className={inputClass("surface")}
               >
-                <option value="">- Select a service -</option>
-                {SERVICES.map((s) => <option key={s} value={s}>{s}</option>)}
+                <option value="">- Select surface -</option>
+                {SURFACES.map((s) => <option key={s} value={s}>{s}</option>)}
               </select>
-              {errors.service && <p className="text-red-400 text-xs mt-1">{errors.service}</p>}
+              {errors.surface && <p className="text-red-400 text-xs mt-1">{errors.surface}</p>}
+            </div>
+
+            <div>
+              <label htmlFor={`${fieldId}-floorSize`} className="block text-sm font-semibold text-gray-300 mb-1">
+                Approximate floor size <span className="text-red-400">*</span>
+              </label>
+              <select
+                id={`${fieldId}-floorSize`}
+                value={data.floorSize}
+                onChange={(e) => set("floorSize", e.target.value)}
+                className={inputClass("floorSize")}
+              >
+                <option value="">- Select size -</option>
+                {FLOOR_SIZES.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+              {errors.floorSize && <p className="text-red-400 text-xs mt-1">{errors.floorSize}</p>}
             </div>
 
             <div>
