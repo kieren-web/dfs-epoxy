@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useInView } from "@/hooks/useInView";
 
@@ -27,14 +28,14 @@ export default function BeforeAfter() {
         >
           {/* Before */}
           <div className="flex-1 relative rounded-2xl overflow-hidden aspect-video md:aspect-[4/3] bg-[#333]">
-            <div className="w-full h-full flex items-center justify-center p-8 text-center">
-              <div>
-                <div className="text-4xl mb-3">📸</div>
-                <p className="text-gray-400 text-sm font-medium">
-                  [BEFORE — Replace with real before photo<br />showing bare/damaged concrete floor]
-                </p>
-              </div>
-            </div>
+            <Image
+              src="/images/before.jpg"
+              alt="Commercial kitchen floor before epoxy — damaged tiles with grime and cracked grout"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
             <div className="absolute bottom-4 left-4">
               <span className="bg-[#444] text-white text-xs font-bold px-3 py-1.5 rounded-full border border-[#555]">
                 BEFORE
@@ -51,14 +52,13 @@ export default function BeforeAfter() {
 
           {/* After */}
           <div className="flex-1 relative rounded-2xl overflow-hidden aspect-video md:aspect-[4/3] bg-[#333]">
-            <div className="w-full h-full flex items-center justify-center p-8 text-center">
-              <div>
-                <div className="text-4xl mb-3">✨</div>
-                <p className="text-gray-400 text-sm font-medium">
-                  [AFTER — Replace with real after photo<br />showing finished epoxy floor]
-                </p>
-              </div>
-            </div>
+            <Image
+              src="/images/after.jpg"
+              alt="Commercial kitchen floor after epoxy installation — seamless grey anti-slip epoxy coating"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
             <div className="absolute bottom-4 left-4">
               <span className="text-white text-xs font-bold px-3 py-1.5 rounded-full" style={{background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)"}}>
                 AFTER

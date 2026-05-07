@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import LeadForm from "./LeadForm";
 import type { Attribution } from "@/hooks/useAttribution";
@@ -18,25 +19,27 @@ interface HeroProps {
 export default function Hero({ attribution }: HeroProps) {
   return (
     <section className="relative bg-[#181818] text-white overflow-hidden min-h-[85vh] flex items-center">
-      {/* Background: dark gradient texture standing in for real photo */}
+      {/* Hero background photo */}
+      <Image
+        src="/images/hero-bg.jpg"
+        alt="Commercial epoxy flooring installed by Dynamic Flooring Solutions on the Central Coast"
+        fill
+        className="object-cover object-center"
+        priority
+        quality={85}
+      />
+      {/* Dark overlay so text stays readable */}
       <div
         className="absolute inset-0"
-        style={{
-          background: "radial-gradient(ellipse at 70% 50%, rgba(123,53,204,0.15) 0%, transparent 60%), radial-gradient(ellipse at 30% 80%, rgba(240,90,40,0.1) 0%, transparent 50%), #181818",
-        }}
+        style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.55) 100%)" }}
         aria-hidden="true"
       />
-      {/* Subtle grid texture overlay */}
+      {/* Subtle gradient accent */}
       <div
-        className="absolute inset-0 opacity-5"
-        style={{backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)", backgroundSize: "60px 60px"}}
+        className="absolute inset-0 opacity-20"
+        style={{ background: "radial-gradient(ellipse at 70% 50%, rgba(123,53,204,0.4) 0%, transparent 60%)" }}
         aria-hidden="true"
       />
-
-      {/* Placeholder label for hero image */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 bg-[#333] text-gray-400 text-xs px-3 py-1.5 rounded-full border border-[#444]">
-        📸 Replace background with real warehouse/commercial epoxy photo
-      </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-16 md:py-20 w-full flex flex-col lg:flex-row items-start gap-10 lg:gap-16">
 
