@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useInView } from "@/hooks/useInView";
 
 const STEPS = [
   { num: "01", title: "Free Site Quote",      body: "We visit your site, assess the floor condition, and give you a fixed price. No surprises, no variations on the day." },
-  { num: "02", title: "System Selection",     body: "We recommend the right epoxy system for your environment — commercial, industrial, or residential. Not the cheapest. The right one." },
+  { num: "02", title: "System Selection",     body: "We recommend the right epoxy system for your environment - commercial, industrial, or residential. Not the cheapest. The right one." },
   { num: "03", title: "Surface Preparation",  body: "Diamond grinding removes all contaminants and creates the ideal surface profile for adhesion. The step most cheap operators skip." },
   { num: "04", title: "Multi-Layer Install",  body: "Primer coat, broadcast layer (flake or solid colour), and durable topcoat applied to manufacturer spec. Every layer, every time." },
   { num: "05", title: "Final Inspection",     body: "We walk through the finished job with you. Not done until you're completely satisfied and the site is clean." },

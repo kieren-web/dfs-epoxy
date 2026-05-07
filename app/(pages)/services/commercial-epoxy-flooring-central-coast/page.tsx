@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePageForm from "@/components/page/ServicePageForm";
 import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
@@ -6,7 +6,7 @@ import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
 export const metadata: Metadata = {
   title: "Commercial Epoxy Flooring Central Coast | Dynamic Flooring Solutions",
   description:
-    "Commercial epoxy flooring specialists on the Central Coast. Warehouses, kitchens, workshops, industrial spaces. Owner-operated, 500+ floors installed. Free quotes — call 0483 986 101.",
+    "Commercial epoxy flooring specialists on the Central Coast. Warehouses, kitchens, workshops, industrial spaces. Owner-operated, 500+ floors installed. Free quotes - call 0483 986 101.",
   alternates: {
     canonical: `${SITE_URL}/services/commercial-epoxy-flooring-central-coast`,
   },
@@ -26,7 +26,7 @@ const services = [
   },
   {
     title: "Commercial Kitchen Flooring",
-    desc: "Hygiene-grade, food-safe coatings that handle daily cleaning, hot water, and chemical washdowns. Fully seamless — no grout lines.",
+    desc: "Hygiene-grade, food-safe coatings that handle daily cleaning, hot water, and chemical washdowns. Fully seamless - no grout lines.",
     href: "/services/commercial-kitchen-epoxy-flooring-central-coast",
   },
   {
@@ -44,7 +44,7 @@ const services = [
 const whyDFS = [
   {
     title: "Owner-Operators On Every Job",
-    desc: "Carl and Santiago are on site — not a supervisor, not a sub. You deal with the owners from quote to final inspection.",
+    desc: "Carl and Santiago are on site - not a supervisor, not a sub. You deal with the owners from quote to final inspection.",
   },
   {
     title: "500+ Commercial Floors Installed",
@@ -56,11 +56,11 @@ const whyDFS = [
   },
   {
     title: "Minimum Disruption",
-    desc: "We stage work around your operations — nights, weekends, sections. Warehouses and commercial kitchens stay running.",
+    desc: "We stage work around your operations - nights, weekends, sections. Warehouses and commercial kitchens stay running.",
   },
   {
     title: "Proper Surface Preparation",
-    desc: "Every job starts with diamond grinding. No prep shortcuts — that's why our floors don't delaminate at 12 months.",
+    desc: "Every job starts with diamond grinding. No prep shortcuts - that's why our floors don't delaminate at 12 months.",
   },
   {
     title: "Fixed-Price Quotes",
@@ -75,11 +75,11 @@ const faqs = [
   },
   {
     q: "Can you work around our business hours?",
-    a: "Yes. We regularly stage commercial jobs to avoid disrupting operations. We can work nights, weekends, or in sections — whatever keeps your business running.",
+    a: "Yes. We regularly stage commercial jobs to avoid disrupting operations. We can work nights, weekends, or in sections - whatever keeps your business running.",
   },
   {
     q: "What's the difference between commercial and residential epoxy?",
-    a: "Commercial systems use heavier build coats, chemical-resistant topcoats, and anti-slip aggregates as standard. Residential systems prioritise aesthetics. We specify the right system for the environment — we don't cut corners by applying a garage system to a warehouse.",
+    a: "Commercial systems use heavier build coats, chemical-resistant topcoats, and anti-slip aggregates as standard. Residential systems prioritise aesthetics. We specify the right system for the environment - we don't cut corners by applying a garage system to a warehouse.",
   },
   {
     q: "Do your commercial coatings meet food safety standards?",
@@ -214,7 +214,7 @@ export default function CommercialEpoxyPage() {
               </h2>
               <div className="space-y-4 text-gray-400 leading-relaxed text-sm">
                 <p>
-                  Commercial and industrial floors face demands that residential floors never will — forklifts, chemical spills,
+                  Commercial and industrial floors face demands that residential floors never will - forklifts, chemical spills,
                   daily washdowns, heavy foot traffic, and pressure-cleaning. A standard coating won't cut it.
                 </p>
                 <p>
@@ -325,7 +325,7 @@ export default function CommercialEpoxyPage() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-white">
-              Commercial Epoxy Flooring — FAQs
+              Commercial Epoxy Flooring - FAQs
             </h2>
           </div>
           <div className="space-y-3">

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePageForm from "@/components/page/ServicePageForm";
 import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
@@ -26,7 +26,7 @@ const features = [
     desc: "Broadcast aggregate anti-slip finish on all warehouse work. Meets WHS slip-resistance requirements for commercial environments.",
   },
   {
-    title: "Seamless — Easy to Clean",
+    title: "Seamless - Easy to Clean",
     desc: "No joints, no cracks, no grout lines. Scrubber machines and pressure cleaning won't damage the surface.",
   },
   {
@@ -58,7 +58,7 @@ const faqs = [
   },
   {
     q: "Can you add line marking and safety zones?",
-    a: "Yes. We can apply epoxy line marking for bays, forklift lanes, pedestrian zones, and safety demarcation as part of the same project — or after the floor is cured.",
+    a: "Yes. We can apply epoxy line marking for bays, forklift lanes, pedestrian zones, and safety demarcation as part of the same project - or after the floor is cured.",
   },
 ];
 
@@ -192,7 +192,7 @@ export default function WarehouseEpoxyPage() {
             The Prep Is What Makes It Last
           </h2>
           <p className="text-gray-400 text-sm leading-relaxed mb-8">
-            Every warehouse floor we install starts with industrial diamond grinding — the only way to create a mechanically profiled
+            Every warehouse floor we install starts with industrial diamond grinding - the only way to create a mechanically profiled
             surface that epoxy truly bonds to. We then apply moisture-mitigating primer, a commercial build coat, and a heavy-duty
             polyurethane topcoat. This isn't how budget operators work. It's how you get a floor that's still performing at 15 years.
           </p>
@@ -244,7 +244,7 @@ export default function WarehouseEpoxyPage() {
 
       <ServicePageForm
         heading="Get a Free Warehouse Epoxy Quote"
-        subheading="We'll visit your site, assess the floor, and give you a fixed price — no surprises."
+        subheading="We'll visit your site, assess the floor, and give you a fixed price - no surprises."
       />
     </>
   );

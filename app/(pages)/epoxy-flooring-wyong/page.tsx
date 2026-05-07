@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePageForm from "@/components/page/ServicePageForm";
 import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
@@ -6,7 +6,7 @@ import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
 export const metadata: Metadata = {
   title: "Epoxy Flooring Wyong | Dynamic Flooring Solutions",
   description:
-    "Epoxy flooring in Wyong. Commercial warehouses, kitchens, workshops & residential garages. Central Coast based, owner-operated. Free quotes — call 0483 986 101.",
+    "Epoxy flooring in Wyong. Commercial warehouses, kitchens, workshops & residential garages. Central Coast based, owner-operated. Free quotes - call 0483 986 101.",
   alternates: {
     canonical: `${SITE_URL}/epoxy-flooring-wyong`,
   },
@@ -55,7 +55,7 @@ const services = [
   },
   {
     title: "Garage Epoxy",
-    desc: "Full broadcast flake systems for Wyong residential garages — hot tyre resistant, UV stable.",
+    desc: "Full broadcast flake systems for Wyong residential garages - hot tyre resistant, UV stable.",
     href: "/services/garage-epoxy-flooring-central-coast",
   },
 ];
@@ -96,7 +96,7 @@ export default function WyongEpoxyPage() {
 
           <p className="text-lg text-gray-400 max-w-2xl mb-8 leading-relaxed">
             Commercial and residential epoxy flooring in Wyong and the northern Central Coast.
-            Based in Tuggerah — right next door. Owner-operated, 500+ floors, fixed-price quotes.
+            Based in Tuggerah - right next door. Owner-operated, 500+ floors, fixed-price quotes.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -167,24 +167,24 @@ export default function WyongEpoxyPage() {
               </h2>
               <div className="space-y-4 text-gray-400 text-sm leading-relaxed">
                 <p>
-                  Dynamic Flooring Solutions is based in Tuggerah — minutes from Wyong. We regularly install epoxy systems
+                  Dynamic Flooring Solutions is based in Tuggerah - minutes from Wyong. We regularly install epoxy systems
                   in the Wyong area: the Warnervale and Wadalba industrial precincts, residential garages, and commercial
                   businesses across the Wyong Shire.
                 </p>
                 <p>
-                  With 500+ floors installed across the Central Coast, we've worked in environments you'd recognise —
+                  With 500+ floors installed across the Central Coast, we've worked in environments you'd recognise -
                   warehouses off the M1, commercial kitchens in Wyong CBD, and garages in suburbs like Hamlyn Terrace,
                   Mardi, and Kanwal.
                 </p>
                 <p>
-                  You deal with Carl and Santiago — the owners. Not a call centre, not a project manager. The people
+                  You deal with Carl and Santiago - the owners. Not a call centre, not a project manager. The people
                   who actually do the work.
                 </p>
               </div>
             </div>
             <div className="space-y-4">
               {[
-                { label: "5 min from Wyong", sub: "Based in Tuggerah — genuinely local" },
+                { label: "5 min from Wyong", sub: "Based in Tuggerah - genuinely local" },
                 { label: "Same-day quote scheduling", sub: "Fast turnaround on site assessments" },
                 { label: "Fixed-price quotes", sub: "The price we quote is the price you pay" },
                 { label: "Owner-operated", sub: "Carl & Santiago on every job" },

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 
 interface ContactPayload {
   service: string;
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     if (!apiKey || !locationId) {
       // Log lead locally if GHL not yet configured
-      console.log("[DFS Lead — GHL not configured]", JSON.stringify(body, null, 2));
+      console.log("[DFS Lead - GHL not configured]", JSON.stringify(body, null, 2));
       return NextResponse.json({ ok: true });
     }
 
@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
 
     if (!contactId) {
       console.error("[GHL] Contact creation failed:", contactData);
-      // Still return success to user — don't block the lead
+      // Still return success to user - don't block the lead
       return NextResponse.json({ ok: true });
     }
 

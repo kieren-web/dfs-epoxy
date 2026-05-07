@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import { useInView } from "@/hooks/useInView";
 
 const FAQS = [
   {
     question: "How much does epoxy flooring cost on the Central Coast?",
-    answer: "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $90–$100 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes — the price we quote is the price you pay, no variations on the day.",
+    answer: "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $90–$100 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes - the price we quote is the price you pay, no variations on the day.",
   },
   {
     question: "How long does epoxy flooring last?",
@@ -17,11 +17,11 @@ const FAQS = [
   },
   {
     question: "Is epoxy flooring slippery?",
-    answer: "Standard high-gloss epoxy can be slippery when wet. We add anti-slip aggregate to all commercial and wet-area work as standard practice — this creates texture without affecting the appearance. Slip resistance ratings are available on request for commercial applications.",
+    answer: "Standard high-gloss epoxy can be slippery when wet. We add anti-slip aggregate to all commercial and wet-area work as standard practice - this creates texture without affecting the appearance. Slip resistance ratings are available on request for commercial applications.",
   },
   {
     question: "How long does installation take?",
-    answer: "A residential double garage takes 1–2 days. Commercial jobs vary depending on floor size and condition — we'll confirm exact timeframes in your quote. You can typically walk on the surface within 24 hours and return to full commercial use within 72 hours.",
+    answer: "A residential double garage takes 1–2 days. Commercial jobs vary depending on floor size and condition - we'll confirm exact timeframes in your quote. You can typically walk on the surface within 24 hours and return to full commercial use within 72 hours.",
   },
   {
     question: "Do you offer a warranty?",
@@ -40,7 +40,7 @@ export default function FAQ() {
             Common Questions
           </p>
           <h2 className="text-3xl font-bold text-white">
-            Epoxy Flooring FAQ — Central Coast
+            Epoxy Flooring FAQ - Central Coast
           </h2>
         </div>
 

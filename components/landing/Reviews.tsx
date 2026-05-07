@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useInView } from "@/hooks/useInView";
 import { RATING, REVIEW_COUNT } from "@/lib/config";
@@ -8,19 +8,19 @@ const REVIEWS = [
     name: "[Placeholder Name]",
     role: "Warehouse Manager, Central Coast",
     stars: 5,
-    text: "DFS transformed our warehouse floor. The finish is incredible and Carl and Santiago were professional from start to finish. The diamond grinding prep made all the difference — couldn't recommend them more highly for any commercial project.",
+    text: "DFS transformed our warehouse floor. The finish is incredible and Carl and Santiago were professional from start to finish. The diamond grinding prep made all the difference - couldn't recommend them more highly for any commercial project.",
   },
   {
     name: "[Placeholder Name]",
     role: "Restaurant Owner, Gosford",
     stars: 5,
-    text: "Had our commercial kitchen floor done by DFS. Incredibly clean finish, slip-resistant, and they had the job done with minimal disruption to our operation. The owners were on site the whole time — that made a huge difference.",
+    text: "Had our commercial kitchen floor done by DFS. Incredibly clean finish, slip-resistant, and they had the job done with minimal disruption to our operation. The owners were on site the whole time - that made a huge difference.",
   },
   {
     name: "[Placeholder Name]",
     role: "Homeowner, Tuggerah",
     stars: 5,
-    text: "Got my garage done — these guys are the real deal. No shortcuts, proper preparation, looks absolutely amazing. Could tell they actually cared about the quality of the result. Would definitely use again.",
+    text: "Got my garage done - these guys are the real deal. No shortcuts, proper preparation, looks absolutely amazing. Could tell they actually cared about the quality of the result. Would definitely use again.",
   },
 ];
 

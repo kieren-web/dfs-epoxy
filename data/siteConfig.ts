@@ -1,4 +1,4 @@
-export const siteConfig = {
+﻿export const siteConfig = {
   name:           "Dynamic Flooring Solutions",
   shortName:      "DFS",
   phone:          "0483 986 101",
@@ -22,7 +22,7 @@ export const siteConfig = {
     "Bateau Bay", "Killarney Vale", "Long Jetty", "Toowoon Bay",
   ],
 
-  // Social — fill in once profiles are set up
+  // Social - fill in once profiles are set up
   facebook:  "",
   instagram: "",
   gmb:       "", // Google Business Profile URL

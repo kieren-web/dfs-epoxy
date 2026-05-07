@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useInView } from "@/hooks/useInView";
@@ -58,7 +58,7 @@ export default function ServicesGrid() {
           </p>
         </div>
 
-        {/* Commercial — primary */}
+        {/* Commercial - primary */}
         <div className="mb-4">
           <div className="flex items-center gap-3 mb-5">
             <span
@@ -87,7 +87,7 @@ export default function ServicesGrid() {
           </div>
         </div>
 
-        {/* Residential — secondary */}
+        {/* Residential - secondary */}
         <div id="residential" className="pt-8">
           <div className="flex items-center gap-3 mb-5">
             <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full text-gray-400 border border-[#444]">

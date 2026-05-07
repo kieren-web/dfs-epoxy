@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useId } from "react";
 import { API_ROUTE, PHONE_NUMBER, PHONE_HREF } from "@/lib/config";
@@ -176,7 +176,7 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
                 onChange={(e) => set("service", e.target.value)}
                 className={inputClass("service")}
               >
-                <option value="">— Select a service —</option>
+                <option value="">- Select a service -</option>
                 {SERVICES.map((s) => <option key={s} value={s}>{s}</option>)}
               </select>
               {errors.service && <p className="text-red-400 text-xs mt-1">{errors.service}</p>}

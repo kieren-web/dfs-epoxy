@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePageForm from "@/components/page/ServicePageForm";
 import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
@@ -19,7 +19,7 @@ const features = [
   },
   {
     title: "Anti-Slip as Standard",
-    desc: "Broadcast anti-slip aggregate in all kitchen work — mandatory in wet, greasy kitchen environments. Slip resistance ratings available on request.",
+    desc: "Broadcast anti-slip aggregate in all kitchen work - mandatory in wet, greasy kitchen environments. Slip resistance ratings available on request.",
   },
   {
     title: "Chemical & Heat Resistant",
@@ -31,11 +31,11 @@ const features = [
   },
   {
     title: "Coved Skirtings Available",
-    desc: "Epoxy coved skirting (curved floor-to-wall junction) eliminates hard-to-clean corners — recommended for commercial kitchens and food-prep areas.",
+    desc: "Epoxy coved skirting (curved floor-to-wall junction) eliminates hard-to-clean corners - recommended for commercial kitchens and food-prep areas.",
   },
   {
     title: "Drain-Compatible Installation",
-    desc: "We work around floor drains with proper sloping and waterproof detailing — no pooling, no water ingress under the coating.",
+    desc: "We work around floor drains with proper sloping and waterproof detailing - no pooling, no water ingress under the coating.",
   },
 ];
 
@@ -54,11 +54,11 @@ const faqs = [
   },
   {
     q: "Is epoxy flooring slippery in a kitchen environment?",
-    a: "Standard high-gloss epoxy can be slippery when wet — which is why we include anti-slip aggregate in all commercial kitchen work as standard. This creates a textured surface that significantly improves slip resistance without compromising hygiene or cleanability.",
+    a: "Standard high-gloss epoxy can be slippery when wet - which is why we include anti-slip aggregate in all commercial kitchen work as standard. This creates a textured surface that significantly improves slip resistance without compromising hygiene or cleanability.",
   },
   {
     q: "What's a coved skirting and do I need it?",
-    a: "A coved skirting is a curved, sealed junction between the floor and wall that eliminates the right-angle corner — a bacteria trap in commercial kitchens. It's highly recommended for food-prep environments and is required in some commercial kitchen fit-out specifications.",
+    a: "A coved skirting is a curved, sealed junction between the floor and wall that eliminates the right-angle corner - a bacteria trap in commercial kitchens. It's highly recommended for food-prep environments and is required in some commercial kitchen fit-out specifications.",
   },
 ];
 
@@ -168,7 +168,7 @@ export default function CommercialKitchenPage() {
               </h2>
               <div className="space-y-4 text-gray-400 leading-relaxed text-sm">
                 <p>
-                  Commercial kitchen floors take a daily beating — hot water, grease, caustic cleaners, dropped equipment,
+                  Commercial kitchen floors take a daily beating - hot water, grease, caustic cleaners, dropped equipment,
                   and constant foot traffic from close-toed shoes. Tiles crack and grow grout lines. Vinyl lifts at the edges.
                   Paint peels under pressure cleaning.
                 </p>
@@ -178,7 +178,7 @@ export default function CommercialKitchenPage() {
                   And with the right anti-slip aggregate, it's safe to work on in wet, greasy conditions.
                 </p>
                 <p>
-                  We've installed epoxy in commercial kitchens across the Central Coast — restaurants, cafes, catering
+                  We've installed epoxy in commercial kitchens across the Central Coast - restaurants, cafes, catering
                   facilities, school canteens, and aged care kitchens. We understand the hygiene requirements and how to
                   install without shutting your kitchen down.
                 </p>
@@ -186,7 +186,7 @@ export default function CommercialKitchenPage() {
             </div>
             <div className="space-y-4">
               {[
-                { label: "Seamless surface", desc: "No grout lines — eliminates bacteria traps that tiled floors create" },
+                { label: "Seamless surface", desc: "No grout lines - eliminates bacteria traps that tiled floors create" },
                 { label: "Anti-slip standard", desc: "Mandatory broadcast aggregate on all wet-area commercial kitchen work" },
                 { label: "Food-safe certified", desc: "Non-toxic, food-grade coatings with product data sheets available" },
                 { label: "Chemical resistant", desc: "Handles degreasers, caustic soda, steam, and hot washdown daily" },

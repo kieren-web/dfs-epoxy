@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePageForm from "@/components/page/ServicePageForm";
 import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
@@ -6,7 +6,7 @@ import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
 export const metadata: Metadata = {
   title: "Epoxy Flooring Tuggerah | Dynamic Flooring Solutions",
   description:
-    "Epoxy flooring in Tuggerah. Local Central Coast specialists — warehouses, commercial kitchens, garages. Owner-operated from Tuggerah. Free quotes — call 0483 986 101.",
+    "Epoxy flooring in Tuggerah. Local Central Coast specialists - warehouses, commercial kitchens, garages. Owner-operated from Tuggerah. Free quotes - call 0483 986 101.",
   alternates: {
     canonical: `${SITE_URL}/epoxy-flooring-tuggerah`,
   },
@@ -50,12 +50,12 @@ const services = [
   },
   {
     title: "Commercial Epoxy",
-    desc: "Full range of commercial epoxy systems — workshops, hospitality, showrooms.",
+    desc: "Full range of commercial epoxy systems - workshops, hospitality, showrooms.",
     href: "/services/commercial-epoxy-flooring-central-coast",
   },
   {
     title: "Garage Epoxy",
-    desc: "Premium residential garage systems — flake broadcast, hot tyre resistant, UV stable.",
+    desc: "Premium residential garage systems - flake broadcast, hot tyre resistant, UV stable.",
     href: "/services/garage-epoxy-flooring-central-coast",
   },
 ];
@@ -96,7 +96,7 @@ export default function TuggerahEpoxyPage() {
 
           <p className="text-lg text-gray-400 max-w-2xl mb-8 leading-relaxed">
             Dynamic Flooring Solutions is based right here in Tuggerah. Commercial and residential epoxy flooring
-            for the local area and the full Central Coast — owner-operated by Carl & Santiago.
+            for the local area and the full Central Coast - owner-operated by Carl & Santiago.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -134,12 +134,12 @@ export default function TuggerahEpoxyPage() {
               <div className="space-y-4 text-gray-400 text-sm leading-relaxed">
                 <p>
                   We're not driving three hours and cutting corners to make the trip worthwhile. Dynamic Flooring Solutions
-                  is based in Tuggerah — we're part of this community, and most of our commercial work is in the Tuggerah,
+                  is based in Tuggerah - we're part of this community, and most of our commercial work is in the Tuggerah,
                   Wyong, and Gosford industrial precincts.
                 </p>
                 <p>
                   Carl and Santiago have been installing commercial and residential epoxy across the Central Coast for 10+ years.
-                  They've done 500+ floors — from warehouses on the industrial estate to garages in residential streets around Tuggerah,
+                  They've done 500+ floors - from warehouses on the industrial estate to garages in residential streets around Tuggerah,
                   Kangy Angy, Berkeley Vale, and Ourimbah.
                 </p>
                 <p>
@@ -224,7 +224,7 @@ export default function TuggerahEpoxyPage() {
 
       <ServicePageForm
         heading="Get a Free Quote in Tuggerah"
-        subheading="Local job, local price. We'll be there fast — we're right around the corner."
+        subheading="Local job, local price. We'll be there fast - we're right around the corner."
       />
     </>
   );

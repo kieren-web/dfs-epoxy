@@ -1,4 +1,4 @@
-// Single source of truth — change here and it propagates everywhere.
+﻿// Single source of truth - change here and it propagates everywhere.
 
 // ── Contact ──────────────────────────────────────────────────────────────────
 export const PHONE_NUMBER = "0483 986 101";

@@ -1,4 +1,4 @@
-export interface Faq {
+﻿export interface Faq {
   question: string;
   answer: string;
 }
@@ -7,7 +7,7 @@ export const homeFaqs: Faq[] = [
   {
     question: "How much does epoxy flooring cost on the Central Coast?",
     answer:
-      "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $90–$100 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes — the price we quote is the price you pay, no variations on the day.",
+      "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $90–$100 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes - the price we quote is the price you pay, no variations on the day.",
   },
   {
     question: "How long does epoxy flooring last?",
@@ -27,7 +27,7 @@ export const homeFaqs: Faq[] = [
   {
     question: "How long does installation take?",
     answer:
-      "A residential double garage takes 1–2 days. Commercial jobs vary — we'll confirm timeframes in your quote. You can typically walk on the surface within 24 hours and return to full commercial use within 72 hours.",
+      "A residential double garage takes 1–2 days. Commercial jobs vary - we'll confirm timeframes in your quote. You can typically walk on the surface within 24 hours and return to full commercial use within 72 hours.",
   },
   {
     question: "Do you offer a warranty?",
@@ -45,12 +45,12 @@ export const commercialFaqs: Faq[] = [
   {
     question: "Can you work around our business hours?",
     answer:
-      "Yes. We regularly stage work to avoid disrupting operations. We can work nights, weekends, or in sections — whatever minimises downtime for your business.",
+      "Yes. We regularly stage work to avoid disrupting operations. We can work nights, weekends, or in sections - whatever minimises downtime for your business.",
   },
   {
     question: "What's the difference between commercial and residential epoxy?",
     answer:
-      "Commercial systems use heavier build coats, chemical-resistant topcoats, and anti-slip aggregates as standard. Residential systems prioritise aesthetics. We specify the right system for the job — we don't apply a garage system to a warehouse.",
+      "Commercial systems use heavier build coats, chemical-resistant topcoats, and anti-slip aggregates as standard. Residential systems prioritise aesthetics. We specify the right system for the job - we don't apply a garage system to a warehouse.",
   },
   {
     question: "Do your commercial coatings meet food safety standards?",
@@ -64,12 +64,12 @@ export const garageFaqs: Faq[] = [
   {
     question: "What's the best epoxy system for a residential garage?",
     answer:
-      "For most residential garages we recommend a full-broadcast flake system — it looks great, hides imperfections, is anti-slip, and holds up to vehicle traffic and oil spills. Solid colour systems are available for a cleaner look.",
+      "For most residential garages we recommend a full-broadcast flake system - it looks great, hides imperfections, is anti-slip, and holds up to vehicle traffic and oil spills. Solid colour systems are available for a cleaner look.",
   },
   {
     question: "Will epoxy flooring handle hot tyre pickup?",
     answer:
-      "Not all epoxy systems do — cheaper products soften under hot tyres and pick up marks. We use polyaspartic topcoats that resist hot tyre transfer and UV yellowing. Worth asking any contractor what topcoat they're using.",
+      "Not all epoxy systems do - cheaper products soften under hot tyres and pick up marks. We use polyaspartic topcoats that resist hot tyre transfer and UV yellowing. Worth asking any contractor what topcoat they're using.",
   },
   ...homeFaqs,
 ];

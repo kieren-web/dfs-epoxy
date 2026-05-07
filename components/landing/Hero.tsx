@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import type { Attribution } from "@/hooks/useAttribution";
 import { PHONE_NUMBER, PHONE_HREF, FLOORS_INSTALLED, YEARS_EXPERIENCE, SERVICE_AREA_PRIMARY } from "@/lib/config";
 
 const BULLETS = [
-  "Experienced owner-operators — not subcontractors",
+  "Experienced owner-operators - not subcontractors",
   "Commercial-grade systems for high-traffic environments",
   `Serving the ${SERVICE_AREA_PRIMARY} & surrounds within 50km`,
 ];

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { BUSINESS_NAME, PHONE_NUMBER, EMAIL } from "@/lib/config";
 import type { Metadata } from "next";
 
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
         <Link href="/" className="text-sm text-gray-400 hover:text-white mb-8 inline-block transition-colors">
           ← Back to Home
         </Link>
-        <h1 className="text-3xl font-bold mb-8">{BUSINESS_NAME} — Privacy Policy</h1>
+        <h1 className="text-3xl font-bold mb-8">{BUSINESS_NAME} - Privacy Policy</h1>
         <div className="prose prose-invert max-w-none text-gray-300 space-y-6 text-sm leading-relaxed">
           <p>
             {BUSINESS_NAME} (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is committed to protecting your personal information.

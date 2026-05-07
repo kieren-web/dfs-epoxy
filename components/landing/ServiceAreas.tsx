@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useInView } from "@/hooks/useInView";
 import { SERVICE_SUBURBS, PHONE_NUMBER, PHONE_HREF } from "@/lib/config";
@@ -19,7 +19,7 @@ export default function ServiceAreas() {
           Serving the Central Coast & Surrounds
         </h2>
         <p className="text-gray-400 max-w-xl mx-auto mb-8">
-          Based in Tuggerah. Operating within a 50km radius — Central Coast, Lake Macquarie, and surrounding areas.
+          Based in Tuggerah. Operating within a 50km radius - Central Coast, Lake Macquarie, and surrounding areas.
         </p>
 
         <div className="flex flex-wrap justify-center gap-2 mb-8">
@@ -41,7 +41,7 @@ export default function ServiceAreas() {
           <a href={PHONE_HREF} className="font-semibold hover:text-white transition-colors dfs-gradient-text">
             Call us on {PHONE_NUMBER}
           </a>{" "}
-          — if we can reach you, we&apos;ll quote you.
+          - if we can reach you, we&apos;ll quote you.
         </p>
       </div>
     </section>

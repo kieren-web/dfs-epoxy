@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Script from "next/script";
 import { localBusinessSchema, faqPageSchema } from "@/lib/schema";
 import HomePageClient from "./HomePageClient";
@@ -20,7 +20,7 @@ const FAQS = [
   {
     question: "How much does epoxy flooring cost on the Central Coast?",
     answer:
-      "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $90–$100 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes — the price we quote is the price you pay, no variations on the day.",
+      "Pricing depends on the size, condition of the existing floor, and system type. Residential garages typically start from $90–$100 per m². Commercial jobs are priced on site inspection. We provide free, fixed-price quotes - the price we quote is the price you pay, no variations on the day.",
   },
   {
     question: "How long does epoxy flooring last?",
@@ -40,7 +40,7 @@ const FAQS = [
   {
     question: "How long does installation take?",
     answer:
-      "A residential double garage takes 1–2 days. Commercial jobs vary — we'll confirm timeframes in your quote. You can typically walk on the surface within 24 hours and return to full commercial use within 72 hours.",
+      "A residential double garage takes 1–2 days. Commercial jobs vary - we'll confirm timeframes in your quote. You can typically walk on the surface within 24 hours and return to full commercial use within 72 hours.",
   },
   {
     question: "Do you offer a warranty?",

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePageForm from "@/components/page/ServicePageForm";
 import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
@@ -22,8 +22,8 @@ const features = [
     desc: "Polyaspartic topcoat resists hot tyre pickup that softens cheaper epoxy systems. Drive in and out without leaving tyre marks.",
   },
   {
-    title: "UV-Stable — No Yellowing",
-    desc: "Polyaspartic topcoat is UV-stable, so the finish stays clear and bright in Australian sunlight — unlike standard epoxy which yellows over time.",
+    title: "UV-Stable - No Yellowing",
+    desc: "Polyaspartic topcoat is UV-stable, so the finish stays clear and bright in Australian sunlight - unlike standard epoxy which yellows over time.",
   },
   {
     title: "Oil & Stain Resistant",
@@ -31,7 +31,7 @@ const features = [
   },
   {
     title: "Anti-Slip as Standard",
-    desc: "All our garage systems include anti-slip aggregate for safety — especially important around cars, driveways, and in wet conditions.",
+    desc: "All our garage systems include anti-slip aggregate for safety - especially important around cars, driveways, and in wet conditions.",
   },
   {
     title: "Completed in 1–2 Days",
@@ -42,7 +42,7 @@ const features = [
 const faqs = [
   {
     q: "How much does garage epoxy flooring cost on the Central Coast?",
-    a: "Residential double garages typically start from $90–$100 per m² for a full broadcast flake system. Price depends on the floor size, existing condition, and system chosen. We provide free, fixed-price quotes — the price we quote is the price you pay.",
+    a: "Residential double garages typically start from $90–$100 per m² for a full broadcast flake system. Price depends on the floor size, existing condition, and system chosen. We provide free, fixed-price quotes - the price we quote is the price you pay.",
   },
   {
     q: "What's the best epoxy system for a residential garage?",
@@ -50,7 +50,7 @@ const faqs = [
   },
   {
     q: "Will epoxy handle hot tyre pickup?",
-    a: "Not all systems do — cheaper products soften under hot tyres and peel off. We use polyaspartic topcoats on all our garage work. Polyaspartic is specifically formulated to resist heat transfer from tyres. Worth asking any contractor what topcoat they're using.",
+    a: "Not all systems do - cheaper products soften under hot tyres and peel off. We use polyaspartic topcoats on all our garage work. Polyaspartic is specifically formulated to resist heat transfer from tyres. Worth asking any contractor what topcoat they're using.",
   },
   {
     q: "How long does a garage epoxy install take?",
@@ -58,7 +58,7 @@ const faqs = [
   },
   {
     q: "Does the concrete need to be prepared first?",
-    a: "Yes — and this is where cheap jobs fail. We diamond grind every garage floor to create a mechanically profiled surface for adhesion. Without proper grinding, even good-quality epoxy will peel. If you're getting quotes, ask every contractor what surface prep they include.",
+    a: "Yes - and this is where cheap jobs fail. We diamond grind every garage floor to create a mechanically profiled surface for adhesion. Without proper grinding, even good-quality epoxy will peel. If you're getting quotes, ask every contractor what surface prep they include.",
   },
   {
     q: "What colours and flake styles are available?",
@@ -117,7 +117,7 @@ export default function GarageEpoxyPage() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold text-white mb-6 border border-purple-500/30"
             style={{ background: "rgba(123,53,204,0.15)" }}>
             <span style={{ color: "#D4187A" }}>⚡</span>
-            Residential Specialist — Central Coast
+            Residential Specialist - Central Coast
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">
@@ -133,12 +133,12 @@ export default function GarageEpoxyPage() {
 
           <p className="text-lg text-gray-400 max-w-2xl mb-6 leading-relaxed">
             Transform your garage with a durable, easy-clean flake epoxy system.
-            Hot-tyre resistant, UV stable, oil-proof — looks great and built to last.
+            Hot-tyre resistant, UV stable, oil-proof - looks great and built to last.
           </p>
 
           <div className="flex items-center gap-4 mb-8">
             <div className="px-4 py-2 rounded-lg border border-[#333] text-sm" style={{ background: "#222" }}>
-              <span className="text-white font-bold">From $50/m²</span>
+              <span className="text-white font-bold">From $90-$100/m²</span>
               <span className="text-gray-400 ml-1">double garage</span>
             </div>
             <div className="px-4 py-2 rounded-lg border border-[#333] text-sm" style={{ background: "#222" }}>
@@ -176,7 +176,7 @@ export default function GarageEpoxyPage() {
               What You Get
             </p>
             <h2 className="text-3xl font-bold text-white">
-              Not Just Paint — A Proper Epoxy System
+              Not Just Paint - A Proper Epoxy System
             </h2>
             <p className="text-gray-400 mt-3 max-w-xl mx-auto text-sm">
               We don't sell painted concrete. Every garage system is multi-layer, properly prepared, and designed to last.
@@ -208,10 +208,10 @@ export default function GarageEpoxyPage() {
             <div className="space-y-3">
               {[
                 "Do you diamond grind the concrete first, or just clean and apply?",
-                "What topcoat do you use — and is it hot tyre resistant?",
+                "What topcoat do you use - and is it hot tyre resistant?",
                 "Is the topcoat UV-stable, or will it yellow in sunlight?",
                 "What's the warranty, and what does it cover?",
-                "Who actually does the installation — owner or subcontractor?",
+                "Who actually does the installation - owner or subcontractor?",
               ].map((q, i) => (
                 <div key={i} className="flex gap-3 text-sm">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white"

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +18,7 @@ export default function BeforeAfter() {
             The Difference Is Night and Day
           </h2>
           <p className="mt-3 text-gray-400 max-w-xl mx-auto">
-            Every floor starts with proper surface preparation. We diamond grind, prime, and apply multi-layer systems — not just paint it over.
+            Every floor starts with proper surface preparation. We diamond grind, prime, and apply multi-layer systems - not just paint it over.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export default function BeforeAfter() {
           <div className="flex-1 relative rounded-2xl overflow-hidden aspect-video md:aspect-[4/3] bg-[#333]">
             <Image
               src="/images/before.jpg"
-              alt="Commercial kitchen floor before epoxy — damaged tiles with grime and cracked grout"
+              alt="Commercial kitchen floor before epoxy - damaged tiles with grime and cracked grout"
               fill
               className="object-cover object-center"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -54,7 +54,7 @@ export default function BeforeAfter() {
           <div className="flex-1 relative rounded-2xl overflow-hidden aspect-video md:aspect-[4/3] bg-[#333]">
             <Image
               src="/images/after.jpg"
-              alt="Commercial kitchen floor after epoxy installation — seamless grey anti-slip epoxy coating"
+              alt="Commercial kitchen floor after epoxy installation - seamless grey anti-slip epoxy coating"
               fill
               className="object-cover object-center"
               sizes="(max-width: 768px) 100vw, 50vw"

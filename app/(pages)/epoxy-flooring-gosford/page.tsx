@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePageForm from "@/components/page/ServicePageForm";
 import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
@@ -6,7 +6,7 @@ import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
 export const metadata: Metadata = {
   title: "Epoxy Flooring Gosford | Dynamic Flooring Solutions",
   description:
-    "Epoxy flooring in Gosford. Commercial and residential — warehouses, kitchens, workshops, garages. Owner-operated, 500+ floors. Free quotes — call 0483 986 101.",
+    "Epoxy flooring in Gosford. Commercial and residential - warehouses, kitchens, workshops, garages. Owner-operated, 500+ floors. Free quotes - call 0483 986 101.",
   alternates: {
     canonical: `${SITE_URL}/epoxy-flooring-gosford`,
   },
@@ -170,16 +170,16 @@ export default function GosfordEpoxyPage() {
               </h2>
               <div className="space-y-4 text-gray-400 text-sm leading-relaxed">
                 <p>
-                  Dynamic Flooring Solutions is based in Tuggerah — right in the heart of the Central Coast. Gosford is one of our most
+                  Dynamic Flooring Solutions is based in Tuggerah - right in the heart of the Central Coast. Gosford is one of our most
                   active service areas, and we install in commercial and residential properties across the entire Gosford region regularly.
                 </p>
                 <p>
-                  Carl and Santiago are owner-operators. They're on every job — not a subcontractor crew. When you deal with DFS,
+                  Carl and Santiago are owner-operators. They're on every job - not a subcontractor crew. When you deal with DFS,
                   you deal with the owners from your first call to the final inspection.
                 </p>
                 <p>
                   We've installed 500+ floors across the Central Coast. Commercial kitchens, warehouses, workshops, and residential
-                  garages — we know what each environment demands and we spec the system accordingly.
+                  garages - we know what each environment demands and we spec the system accordingly.
                 </p>
               </div>
             </div>

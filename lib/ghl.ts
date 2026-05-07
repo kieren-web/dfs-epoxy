@@ -1,11 +1,11 @@
-import type { LeadRow } from "./supabase";
+﻿import type { LeadRow } from "./supabase";
 
 export async function pushToGHL(lead: LeadRow): Promise<void> {
   const apiKey = process.env.GHL_API_KEY;
   const locationId = process.env.GHL_LOCATION_ID;
 
   if (!apiKey || !locationId) {
-    console.warn("[GHL] API key or location ID not configured — skipping.");
+    console.warn("[GHL] API key or location ID not configured - skipping.");
     return;
   }
 
