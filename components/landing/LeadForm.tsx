@@ -139,16 +139,17 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
           <CheckIcon />
         </div>
         <h3 className="text-xl font-bold text-white mb-2">Request received!</h3>
-        <p className="text-gray-400 mb-6 text-sm">
+        <p className="text-gray-400 mb-1 text-sm">
           Thanks! We&apos;ll be in touch within 24 hours to discuss your project.
         </p>
+        <p className="text-gray-500 mb-6 text-xs">Need something urgent? Give us a call.</p>
         <a
           href={PHONE_HREF}
           onClick={() => trackClickCall("form-success")}
-          className="dfs-btn inline-flex items-center gap-2 px-6 py-3"
+          className="dfs-btn inline-flex items-center justify-center gap-2 w-full py-3 text-sm whitespace-nowrap"
         >
           <PhoneIcon />
-          Call Us: {PHONE_NUMBER}
+          {PHONE_NUMBER}
         </a>
       </div>
     );
