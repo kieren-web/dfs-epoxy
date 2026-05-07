@@ -27,6 +27,10 @@ const FAQS = [
     question: "Do you offer a warranty?",
     answer: "Yes. We stand behind our work. Warranty terms are confirmed at quote stage and depend on the system installed and the environment. We use commercial-grade materials and follow manufacturer installation specs on every job.",
   },
+  {
+    question: "What surfaces can epoxy be applied to?",
+    answer: "Epoxy is designed to be applied directly to concrete - it bonds to the surface at a chemical level, which is what gives it its strength and durability. We do not apply epoxy over tiles, timber, or vinyl. Those surfaces flex, expand, and contract in ways that cause epoxy to delaminate and fail. If you have tiles or timber, we'll let you know at the quote stage what the options are - in most cases the existing surface needs to come up first.",
+  },
 ];
 
 export default function FAQ() {

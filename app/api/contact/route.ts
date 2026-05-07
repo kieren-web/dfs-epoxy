@@ -2,6 +2,7 @@
 
 interface ContactPayload {
   service: string;
+  floor_size?: string;
   suburb: string;
   first_name: string;
   last_name: string;
@@ -87,6 +88,7 @@ export async function POST(req: NextRequest) {
     const noteLines = [
       `Source: DFS Website`,
       `Service: ${body.service}`,
+      body.floor_size ? `Floor size: ${body.floor_size}` : null,
       `Suburb: ${body.suburb}`,
       `Best time to call: ${body.best_time || "ASAP"}`,
       body.utm_source   ? `UTM Source: ${body.utm_source}`     : null,

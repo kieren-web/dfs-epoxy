@@ -10,14 +10,6 @@ const SPACE_TYPES = [
   "Residential Space",
 ];
 
-const SURFACES = [
-  "Concrete",
-  "Tiles",
-  "Timber / Wood",
-  "Existing Epoxy / Coating",
-  "Other / Not Sure",
-];
-
 const FLOOR_SIZES = [
   "Under 20m²",
   "20 - 50m²",
@@ -38,7 +30,6 @@ type Status = "idle" | "submitting" | "success" | "error";
 
 interface FormData {
   service: string;
-  surface: string;
   floorSize: string;
   suburb: string;
   firstName: string;
@@ -61,7 +52,7 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
   const fieldId = useId();
 
   const [data, setData] = useState<FormData>({
-    service: "", surface: "", floorSize: "", suburb: "",
+    service: "", floorSize: "", suburb: "",
     firstName: "", lastName: "", mobile: "", email: "",
     bestTime: "asap", honeypot: "",
   });
@@ -75,7 +66,6 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
   function validateStep1(): boolean {
     const e: Partial<Record<keyof FormData, string>> = {};
     if (!data.service)              e.service   = "Please select a space type.";
-    if (!data.surface)              e.surface   = "Please select a floor surface.";
     if (!data.floorSize)            e.floorSize = "Please select an approximate size.";
     if (!data.suburb.trim())        e.suburb    = "Please enter your suburb.";
     else if (/^\d+$/.test(data.suburb.trim())) e.suburb = "Please enter a suburb name, not a postcode.";
@@ -116,8 +106,8 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service: data.service, surface: data.surface,
-          floor_size: data.floorSize, suburb: data.suburb,
+          service: data.service, floor_size: data.floorSize,
+          suburb: data.suburb,
           first_name: data.firstName, last_name: data.lastName,
           mobile: data.mobile, email: data.email,
           best_time: data.bestTime, honeypot: data.honeypot,
@@ -200,22 +190,6 @@ export default function LeadForm({ attribution, formRef }: LeadFormProps) {
                 ))}
               </div>
               {errors.service && <p className="text-red-400 text-xs mt-1">{errors.service}</p>}
-            </div>
-
-            <div>
-              <label htmlFor={`${fieldId}-surface`} className="block text-sm font-semibold text-gray-300 mb-1">
-                Current floor surface <span className="text-red-400">*</span>
-              </label>
-              <select
-                id={`${fieldId}-surface`}
-                value={data.surface}
-                onChange={(e) => set("surface", e.target.value)}
-                className={inputClass("surface")}
-              >
-                <option value="">- Select surface -</option>
-                {SURFACES.map((s) => <option key={s} value={s}>{s}</option>)}
-              </select>
-              {errors.surface && <p className="text-red-400 text-xs mt-1">{errors.surface}</p>}
             </div>
 
             <div>
