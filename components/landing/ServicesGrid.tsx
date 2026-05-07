@@ -61,7 +61,7 @@ export default function ServicesGrid() {
             Our Services
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Commercial Experts. Residential Too.
+            Commercial & Residential Epoxy Experts
           </h2>
           <p className="mt-3 text-gray-400 max-w-2xl mx-auto">
             We specialise in high-traffic commercial environments - but we coat any concrete surface. Garages, patios, driveways, workshops, kitchens, warehouses. If it's concrete, we can help.
