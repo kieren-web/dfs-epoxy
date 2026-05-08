@@ -11,6 +11,7 @@ const SERVICES = [
   { label: "Warehouse Flooring", href: "/services/warehouse-epoxy-flooring-central-coast" },
   { label: "Commercial Kitchen Flooring", href: "/services/commercial-kitchen-epoxy-flooring-central-coast" },
   { label: "Garage Epoxy Flooring", href: "/services/garage-epoxy-flooring-central-coast" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Get a Free Quote", href: "/#quote" },
 ];
 

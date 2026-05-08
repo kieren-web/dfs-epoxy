@@ -9,6 +9,7 @@ import { trackClickCall } from "@/lib/analytics";
 const NAV_LINKS = [
   { label: "Commercial", href: "/services/commercial-epoxy-flooring-central-coast" },
   { label: "Residential", href: "/services/residential-epoxy-flooring-central-coast" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/blog" },
   { label: "Reviews", href: "/#reviews" },
 ];
@@ -18,6 +19,7 @@ const MOBILE_LINKS = [
   { label: "Residential Epoxy Flooring", href: "/services/residential-epoxy-flooring-central-coast" },
   { label: "Warehouse Flooring", href: "/services/warehouse-epoxy-flooring-central-coast" },
   { label: "Garage Epoxy Flooring", href: "/services/garage-epoxy-flooring-central-coast" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Blog & Guides", href: "/blog" },
   { label: "Reviews", href: "/#reviews" },
 ];
