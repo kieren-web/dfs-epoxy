@@ -121,9 +121,17 @@ export default function SiteFooter() {
         {/* Bottom bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600">
           <p>© {year} {BUSINESS_NAME} Pty Ltd. All rights reserved.</p>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap items-center gap-5">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <span>Serving the {SERVICE_AREA_PRIMARY} & surrounds, NSW</span>
+            <a
+              href="https://axiondigital.com.au"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Built by Axion Digital
+            </a>
           </div>
         </div>
       </div>
