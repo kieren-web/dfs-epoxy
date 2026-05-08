@@ -9,14 +9,21 @@ interface GalleryImage {
   alt: string;
 }
 
+interface BeforeAfterPair {
+  before: GalleryImage;
+  after: GalleryImage;
+  label: string;
+}
+
 interface Props {
   commercialImages: GalleryImage[];
   residentialImages: GalleryImage[];
+  beforeAfter: BeforeAfterPair[];
 }
 
 type Tab = "commercial" | "residential";
 
-export default function GalleryClient({ commercialImages, residentialImages }: Props) {
+export default function GalleryClient({ commercialImages, residentialImages, beforeAfter }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>("commercial");
   const [lightbox, setLightbox] = useState<GalleryImage | null>(null);
 
@@ -47,7 +54,7 @@ export default function GalleryClient({ commercialImages, residentialImages }: P
         </div>
       </section>
 
-      {/* Tabs + Grid */}
+      {/* Tabs + Content */}
       <section className="px-4 sm:px-6 lg:px-8 pb-24" style={{ background: "#181818" }}>
         <div className="max-w-6xl mx-auto">
 
@@ -77,21 +84,65 @@ export default function GalleryClient({ commercialImages, residentialImages }: P
             </button>
           </div>
 
-          {/* Empty state for residential */}
-          {images.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-24 text-center">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4" style={{ background: "rgba(123,53,204,0.15)" }}>
-                <span className="text-2xl">📷</span>
+          {/* Before & After — residential only */}
+          {activeTab === "residential" && beforeAfter.length > 0 && (
+            <div className="mb-12">
+              <h2 className="text-white font-bold text-xl mb-6 flex items-center gap-3">
+                <span className="w-8 h-1 rounded-full inline-block" style={{ background: "linear-gradient(90deg, #7B35CC, #F05A28)" }} />
+                Before & After
+              </h2>
+              <div className="grid sm:grid-cols-1 gap-6">
+                {beforeAfter.map((pair, i) => (
+                  <div key={i} className="rounded-2xl overflow-hidden border border-[#333]" style={{ background: "#222" }}>
+                    <div className="grid grid-cols-2 gap-0.5">
+                      {/* Before */}
+                      <div className="relative cursor-pointer group" onClick={() => setLightbox(pair.before)}>
+                        <Image
+                          src={pair.before.src}
+                          alt={pair.before.alt}
+                          width={800}
+                          height={600}
+                          className="w-full h-64 sm:h-80 object-cover"
+                          sizes="(max-width: 640px) 50vw, 600px"
+                        />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center" style={{ background: "rgba(0,0,0,0.3)" }}>
+                          <ExpandIcon />
+                        </div>
+                        <div className="absolute bottom-3 left-3">
+                          <span className="px-3 py-1 rounded-md text-xs font-bold text-white" style={{ background: "rgba(0,0,0,0.7)" }}>BEFORE</span>
+                        </div>
+                      </div>
+                      {/* After */}
+                      <div className="relative cursor-pointer group" onClick={() => setLightbox(pair.after)}>
+                        <Image
+                          src={pair.after.src}
+                          alt={pair.after.alt}
+                          width={800}
+                          height={600}
+                          className="w-full h-64 sm:h-80 object-cover"
+                          sizes="(max-width: 640px) 50vw, 600px"
+                        />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center" style={{ background: "rgba(123,53,204,0.25)" }}>
+                          <ExpandIcon />
+                        </div>
+                        <div className="absolute bottom-3 right-3">
+                          <span className="px-3 py-1 rounded-md text-xs font-bold text-white" style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A)" }}>AFTER</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-5 py-3 border-t border-[#333]">
+                      <p className="text-sm text-gray-300 font-medium">{pair.label}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <p className="text-white font-semibold mb-2">Photos coming soon</p>
-              <p className="text-gray-500 text-sm max-w-sm">We&apos;re adding residential gallery photos shortly. In the meantime, check out our commercial work.</p>
-              <button
-                onClick={() => setActiveTab("commercial")}
-                className="mt-6 px-5 py-2 rounded-lg text-sm font-semibold text-white"
-                style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)" }}
-              >
-                View Commercial Work
-              </button>
+
+              {/* Divider */}
+              <div className="flex items-center gap-4 mt-10 mb-8">
+                <div className="flex-1 h-px bg-[#2a2a2a]" />
+                <span className="text-xs font-bold uppercase tracking-widest text-gray-600">More Residential Work</span>
+                <div className="flex-1 h-px bg-[#2a2a2a]" />
+              </div>
             </div>
           )}
 
@@ -113,7 +164,6 @@ export default function GalleryClient({ commercialImages, residentialImages }: P
                     className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  {/* Hover overlay */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center" style={{ background: "rgba(123,53,204,0.25)" }}>
                     <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                       <ExpandIcon />
@@ -125,27 +175,25 @@ export default function GalleryClient({ commercialImages, residentialImages }: P
           )}
 
           {/* CTA */}
-          {images.length > 0 && (
-            <div className="mt-16 rounded-2xl border border-[#333] p-8 text-center" style={{ background: "#222" }}>
-              <h2 className="text-2xl font-bold text-white mb-3">Like what you see?</h2>
-              <p className="text-gray-400 mb-6 text-sm">Get a free quote for your floor. Fixed price — what we quote is what you pay.</p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link
-                  href="/#quote"
-                  className="inline-flex items-center justify-center px-7 py-3 rounded-lg text-white font-bold text-sm transition-opacity hover:opacity-90"
-                  style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)" }}
-                >
-                  Get a Free Quote →
-                </Link>
-                <Link
-                  href="/services/commercial-epoxy-flooring-central-coast"
-                  className="inline-flex items-center justify-center px-7 py-3 rounded-lg text-gray-300 font-semibold text-sm border border-[#444] hover:border-[#666] transition-colors"
-                >
-                  Commercial Services
-                </Link>
-              </div>
+          <div className="mt-16 rounded-2xl border border-[#333] p-8 text-center" style={{ background: "#222" }}>
+            <h2 className="text-2xl font-bold text-white mb-3">Like what you see?</h2>
+            <p className="text-gray-400 mb-6 text-sm">Get a free quote for your floor. Fixed price — what we quote is what you pay.</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/#quote"
+                className="inline-flex items-center justify-center px-7 py-3 rounded-lg text-white font-bold text-sm transition-opacity hover:opacity-90"
+                style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)" }}
+              >
+                Get a Free Quote →
+              </Link>
+              <Link
+                href="/services/commercial-epoxy-flooring-central-coast"
+                className="inline-flex items-center justify-center px-7 py-3 rounded-lg text-gray-300 font-semibold text-sm border border-[#444] hover:border-[#666] transition-colors"
+              >
+                Commercial Services
+              </Link>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
