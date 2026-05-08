@@ -260,15 +260,12 @@ export async function GET(request: Request) {
 
     const html = buildEmailHtml(ga4, sc, weekLabel);
 
-    // Send email via Gmail SMTP (using reporting Gmail)
+    // Send email via Gmail SMTP with App Password
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        type: "OAuth2",
         user: process.env.REPORTING_GMAIL,
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        pass: process.env.GMAIL_APP_PASSWORD,
       },
     });
 
