@@ -31,6 +31,11 @@ const BEFORE_AFTER = [
     after: { src: "/images/gallery/before-after/after-1.jpg", alt: "After epoxy flooring — finished floor" },
     label: "Garage Floor Transformation",
   },
+  {
+    before: { src: "/images/gallery/before-after/before-2.jpg", alt: "Before epoxy flooring — concrete floor" },
+    after: { src: "/images/gallery/before-after/after-2.jpg", alt: "After epoxy flooring — finished floor" },
+    label: "Garage Floor Transformation",
+  },
 ];
 
 export default function GalleryPage() {
