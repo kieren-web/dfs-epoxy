@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { GOOGLE_REVIEW_URL } from "@/lib/config";
+import { GOOGLE_REVIEW_URL, PHONE_HREF, PHONE_NUMBER, SITE_URL } from "@/lib/config";
 
 type Stage = "stars" | "feedback" | "thanks";
 
@@ -50,9 +50,10 @@ export default function ReviewPage() {
   const activeStars = hoveredStar || selectedStar;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12"
-      style={{ background: "var(--dfs-bg)" }}>
-
+    <div
+      className="min-h-screen flex flex-col items-center justify-center px-4 py-12"
+      style={{ background: "var(--dfs-bg)" }}
+    >
       {/* Logo */}
       <div className="mb-8">
         <Image
@@ -70,12 +71,12 @@ export default function ReviewPage() {
         <div className="w-full max-w-md text-center">
           <h1 className="text-3xl font-bold text-white mb-2">How did we do?</h1>
           <p className="text-gray-400 mb-8">
-            Your feedback means everything to us. Tap the stars to rate your experience.
+            Carl &amp; Santiago would love to hear your feedback on your recent flooring job.
           </p>
 
           {/* Star row */}
           <div
-            className="flex justify-center gap-3 mb-6"
+            className="flex justify-center gap-3 mb-10"
             onMouseLeave={() => setHoveredStar(0)}
           >
             {[1, 2, 3, 4, 5].map((star) => (
@@ -103,9 +104,22 @@ export default function ReviewPage() {
             ))}
           </div>
 
-          <p className="text-sm text-gray-500">
-            5 stars? You&apos;ll be taken straight to Google to leave your review.
-          </p>
+          {/* Footer links */}
+          <div className="flex items-center justify-center gap-6 text-sm">
+            <a
+              href={SITE_URL}
+              className="text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              ← Back to website
+            </a>
+            <span className="text-gray-700">|</span>
+            <a
+              href={PHONE_HREF}
+              className="text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              📞 {PHONE_NUMBER}
+            </a>
+          </div>
         </div>
       )}
 
@@ -113,7 +127,6 @@ export default function ReviewPage() {
       {stage === "feedback" && (
         <div className="w-full max-w-md">
           <div className="text-center mb-6">
-            {/* Show selected rating */}
             <div className="flex justify-center gap-1.5 mb-4">
               {[1, 2, 3, 4, 5].map((star) => (
                 <svg
@@ -229,13 +242,28 @@ export default function ReviewPage() {
             </svg>
           </div>
           <h2 className="text-2xl font-bold text-white mb-2">Thanks for your feedback</h2>
-          <p className="text-gray-400 text-sm leading-relaxed">
+          <p className="text-gray-400 text-sm leading-relaxed mb-8">
             We appreciate you letting us know. Carl &amp; Santiago will personally review your
             feedback and reach out if needed.
           </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href={SITE_URL}
+              className="px-6 py-3 rounded-lg text-sm font-medium text-gray-300 hover:text-white transition-colors"
+              style={{ border: "1px solid var(--dfs-border)" }}
+            >
+              ← Back to website
+            </a>
+            <a
+              href={PHONE_HREF}
+              className="dfs-btn px-6 py-3 text-sm text-center"
+            >
+              📞 Call {PHONE_NUMBER}
+            </a>
+          </div>
         </div>
       )}
-
     </div>
   );
 }
