@@ -77,6 +77,16 @@ export async function POST(req: NextRequest) {
       contactId = errData?.meta?.contactId;
     }
 
+    // Fallback: search by email if 400 didn't include contactId
+    if (!contactId && contactRes.status === 400) {
+      const searchRes = await fetch(
+        `https://services.leadconnectorhq.com/contacts/search?locationId=${locationId}&query=${encodeURIComponent(body.email)}`,
+        { headers: ghlHeaders }
+      );
+      const searchData = await searchRes.json() as { contacts?: { id?: string }[] };
+      contactId = searchData?.contacts?.[0]?.id;
+    }
+
     if (!contactId) {
       console.error("[DFS] Could not get contactId from GHL");
       return NextResponse.json({ ok: true });
