@@ -31,6 +31,9 @@ export const SERVICE_SUBURBS = [
   "Bateau Bay", "Killarney Vale", "Long Jetty", "Toowoon Bay",
 ];
 
+// ── Reviews ───────────────────────────────────────────────────────────────────
+export const GOOGLE_REVIEW_URL = "https://g.page/r/CVDLxrwBhDXoEAI/review";
+
 // ── Lead flow ─────────────────────────────────────────────────────────────────
 export const SUPABASE_TABLE = "leads_dfs";
 export const API_ROUTE = "/api/contact";
