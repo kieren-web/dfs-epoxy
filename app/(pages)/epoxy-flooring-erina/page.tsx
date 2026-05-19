@@ -33,10 +33,50 @@ const schema = {
 
 const nearbyAreas = ["Gosford", "East Gosford", "Niagara Park", "Lisarow", "Wyoming", "Kincumber", "Matcham", "Holgate"];
 
+const faqs = [
+  {
+    q: "Do you install epoxy flooring in Erina?",
+    a: "Yes. Erina is one of our regular service areas — both the retail and commercial precincts and surrounding residential streets. We're based in Tuggerah, just minutes away.",
+  },
+  {
+    q: "How much does epoxy flooring cost in Erina?",
+    a: "Residential garage systems start from $90–$100/m². Retail and commercial spaces vary based on floor size, condition, and system type. We provide free fixed-price quotes on site — no obligation.",
+  },
+  {
+    q: "How quickly can you quote in Erina?",
+    a: "We aim to visit within 2–3 business days and provide a same-day quote. Being based in Tuggerah, Erina is a very quick drive for us.",
+  },
+  {
+    q: "Can you epoxy a retail or showroom floor in Erina?",
+    a: "Yes. Seamless epoxy is a popular choice for retail and showroom environments — it's professional-looking, easy to maintain, and highly durable. We service commercial retail premises throughout Erina and the surrounding Central Coast.",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://dynamicflooringsolutions.com.au" },
+    { "@type": "ListItem", position: 2, name: "Epoxy Flooring Erina", item: "https://dynamicflooringsolutions.com.au/epoxy-flooring-erina" },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function ErinaEpoxyPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8" style={{ background: "linear-gradient(135deg, #0f0f0f 0%, #181818 50%, #1a1020 100%)" }}>
         <div className="max-w-5xl mx-auto">
@@ -130,6 +170,30 @@ export default function ErinaEpoxyPage() {
           <div className="flex flex-wrap justify-center gap-3">
             {nearbyAreas.map((area) => (
               <span key={area} className="px-4 py-2 rounded-full text-sm text-gray-300 border border-[#333]" style={{ background: "#222" }}>{area}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#1a1a1a" }}>
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-white">Epoxy Flooring Erina — FAQs</h2>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <details key={faq.q} className="group rounded-xl overflow-hidden border border-[#333]" style={{ background: "#222" }}>
+                <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-semibold text-white hover:bg-[#2a2a2a] transition-colors text-sm">
+                  {faq.q}
+                  <span className="flex-shrink-0 transition-transform group-open:rotate-45 text-gray-400">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 text-gray-400 leading-relaxed text-sm border-t border-[#333] pt-4">{faq.a}</div>
+              </details>
             ))}
           </div>
         </div>

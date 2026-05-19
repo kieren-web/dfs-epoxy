@@ -32,7 +32,7 @@ const services = [
   {
     title: "Workshop & Industrial Flooring",
     desc: "Oil-resistant, impact-resistant systems for mechanics workshops, manufacturing plants, and industrial spaces.",
-    href: "/services/warehouse-epoxy-flooring-central-coast",
+    href: "/services/workshop-epoxy-flooring-central-coast",
   },
   {
     title: "Brewery & Hospitality Flooring",

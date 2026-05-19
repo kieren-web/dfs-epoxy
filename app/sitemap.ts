@@ -8,6 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Homepage ────────────────────────────────────────────────────────────
     { url: SITE_URL, lastModified: now, changeFrequency: "weekly", priority: 1 },
 
+    // ── Services index ──────────────────────────────────────────────────────
+    { url: `${SITE_URL}/services`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+
     // ── Commercial service pages ────────────────────────────────────────────
     { url: `${SITE_URL}/services/commercial-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/services/warehouse-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
@@ -16,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Residential service pages ───────────────────────────────────────────
     { url: `${SITE_URL}/services/residential-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${SITE_URL}/services/garage-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/services/workshop-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
 
     // ── Location pages ──────────────────────────────────────────────────────
     { url: `${SITE_URL}/epoxy-flooring-gosford`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },

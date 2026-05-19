@@ -60,10 +60,50 @@ const nearbyAreas = [
   "Erina", "Narara", "Point Frederick", "Springfield",
 ];
 
+const faqs = [
+  {
+    q: "Do you install epoxy flooring in Gosford?",
+    a: "Yes, we service Gosford and all surrounding suburbs regularly. We're based in Tuggerah — about 15 minutes north — so Gosford is one of our most active service areas for both commercial and residential jobs.",
+  },
+  {
+    q: "How much does epoxy flooring cost in Gosford?",
+    a: "Residential garage systems start from $90–$100/m². Commercial jobs — warehouses, kitchens, workshops — are priced on site inspection due to the variation in floor size, condition, and system requirements. We provide free fixed-price quotes with no obligation.",
+  },
+  {
+    q: "How quickly can you quote a job in Gosford?",
+    a: "We aim to visit within 2–3 business days of your enquiry and provide a same-day quote on site. Most Gosford jobs we can schedule quickly given our proximity.",
+  },
+  {
+    q: "Do you work on commercial floors in Gosford?",
+    a: "Yes. We regularly install epoxy in Gosford warehouses, commercial kitchens, workshops, and industrial spaces. Commercial work makes up a large part of what we do on the Central Coast.",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://dynamicflooringsolutions.com.au" },
+    { "@type": "ListItem", position: 2, name: "Epoxy Flooring Gosford", item: "https://dynamicflooringsolutions.com.au/epoxy-flooring-gosford" },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function GosfordEpoxyPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Hero */}
       <section
@@ -215,6 +255,30 @@ export default function GosfordEpoxyPage() {
               <span key={area} className="px-4 py-2 rounded-full text-sm text-gray-300 border border-[#333]" style={{ background: "#222" }}>
                 {area}
               </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#1a1a1a" }}>
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-white">Epoxy Flooring Gosford — FAQs</h2>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <details key={faq.q} className="group rounded-xl overflow-hidden border border-[#333]" style={{ background: "#222" }}>
+                <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-semibold text-white hover:bg-[#2a2a2a] transition-colors text-sm">
+                  {faq.q}
+                  <span className="flex-shrink-0 transition-transform group-open:rotate-45 text-gray-400">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 text-gray-400 leading-relaxed text-sm border-t border-[#333] pt-4">{faq.a}</div>
+              </details>
             ))}
           </div>
         </div>
