@@ -501,11 +501,10 @@ function buildEmailHtml(
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  // Auth temporarily disabled for manual trigger — will re-enable after test
-  // const expectedSecret = process.env.CRON_SECRET || "axion-dfs-2025";
-  // if (searchParams.get("secret") !== expectedSecret) {
-  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  // }
+  const expectedSecret = process.env.CRON_SECRET || "axion-dfs-2025";
+  if (searchParams.get("secret") !== expectedSecret) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   try {
     const auth = getOAuthClient();
