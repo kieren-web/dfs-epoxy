@@ -1,0 +1,213 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import ServicePageForm from "@/components/page/ServicePageForm";
+import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
+
+export const metadata: Metadata = {
+  title: "Epoxy Flooring Avoca Beach | Dynamic Flooring Solutions",
+  description:
+    "Premium epoxy flooring in Avoca Beach. Residential garages, driveways, patios, and hospitality venues. UV-stable coastal systems. Owner-operated. Free quotes — call 0483 986 101.",
+  alternates: { canonical: `${SITE_URL}/epoxy-flooring-avoca-beach` },
+};
+
+const services = [
+  { title: "Garage Epoxy Flooring", desc: "Premium multi-layer broadcast flake systems for Avoca Beach residential garages. UV-stable, hot tyre resistant, commercial-grade finish.", href: "/services/garage-epoxy-flooring-central-coast" },
+  { title: "Driveways & Patios", desc: "Polyaspartic UV-stable coatings for outdoor concrete at Avoca Beach. Resists coastal sun, salt air, and daily foot traffic without yellowing.", href: "/services/residential-epoxy-flooring-central-coast" },
+  { title: "Hospitality & Cafe Flooring", desc: "Food-safe, slip-resistant commercial epoxy for cafes, restaurants, and hospitality venues along the Avoca Beach strip.", href: "/services/commercial-kitchen-epoxy-flooring-central-coast" },
+  { title: "Commercial & Retail Flooring", desc: "Seamless commercial-grade epoxy for retail stores and commercial premises in Avoca Beach and surrounds.", href: "/services/commercial-epoxy-flooring-central-coast" },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Epoxy Flooring Avoca Beach",
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Dynamic Flooring Solutions",
+    telephone: "+61483986101",
+    address: { "@type": "PostalAddress", addressLocality: "Tuggerah", addressRegion: "NSW", addressCountry: "AU" },
+  },
+  areaServed: "Avoca Beach, NSW",
+  description: "Premium residential and commercial epoxy flooring in Avoca Beach. UV-stable coastal systems, hospitality floor specialists. Owner-operated, 500+ floors installed.",
+};
+
+const nearbyAreas = ["Terrigal", "Wamberal", "Copacabana", "MacMasters Beach", "Kincumber", "Erina", "Matcham", "Gosford"];
+
+const faqs = [
+  {
+    q: "Do you install epoxy flooring in Avoca Beach?",
+    a: "Yes. We service Avoca Beach for both residential and commercial jobs. Avoca is part of our regular Central Coast service area — from prestige residential garages to hospitality venues along the beachfront.",
+  },
+  {
+    q: "What finish works best for a beachside home in Avoca Beach?",
+    a: "For outdoor areas exposed to direct coastal sun, we recommend a polyaspartic UV-stable topcoat. Standard epoxy will yellow and chalk within 2–3 years in direct coastal sun. Inside, a full broadcast flake system with clear topcoat gives a premium finish that handles daily traffic and looks great long term.",
+  },
+  {
+    q: "How much does a premium residential epoxy floor cost in Avoca Beach?",
+    a: "Residential systems start from $90–$100/m² for a standard garage. Premium finishes and larger areas are quoted individually on site. All quotes are free and fixed-price with no day-of variations.",
+  },
+  {
+    q: "Do you do commercial cafe flooring in Avoca Beach?",
+    a: "Yes. We install food-safe, slip-resistant commercial epoxy systems for cafes and hospitality venues. These are multi-layer systems with an anti-slip aggregate topcoat — different to a residential product and designed for high foot traffic and daily cleaning.",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://dynamicflooringsolutions.com.au" },
+    { "@type": "ListItem", position: 2, name: "Epoxy Flooring Avoca Beach", item: "https://dynamicflooringsolutions.com.au/epoxy-flooring-avoca-beach" },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+export default function AvocaBeachEpoxyPage() {
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
+      <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8" style={{ background: "linear-gradient(135deg, #0f0f0f 0%, #181818 50%, #1a1020 100%)" }}>
+        <div className="max-w-5xl mx-auto">
+          <nav className="flex items-center gap-2 text-xs text-gray-500 mb-8">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-gray-300">Epoxy Flooring Avoca Beach</span>
+          </nav>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold text-white mb-6 border border-purple-500/30" style={{ background: "rgba(123,53,204,0.15)" }}>
+            <span style={{ color: "#D4187A" }}>📍</span> Serving Avoca Beach &amp; Surrounding Suburbs
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">
+            Epoxy Flooring{" "}
+            <span style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              Avoca Beach
+            </span>
+          </h1>
+          <p className="text-lg text-gray-400 max-w-2xl mb-8 leading-relaxed">
+            Premium residential and commercial epoxy flooring in Avoca Beach. Garages, driveways, patios, and hospitality venues — UV-stable coastal systems for discerning homeowners and business owners.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a href="#quote" className="inline-flex items-center justify-center px-7 py-3.5 rounded-lg text-white font-bold text-sm transition-opacity hover:opacity-90" style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)" }}>
+              Get a Free Quote in Avoca Beach
+            </a>
+            <a href={PHONE_HREF} className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg text-white font-semibold text-sm border border-white/20 hover:bg-white/5 transition-colors">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z" /></svg>
+              Call {PHONE_NUMBER}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#181818" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: "#D4187A" }}>Avoca Beach Services</p>
+            <h2 className="text-3xl font-bold text-white">Epoxy Flooring Services in Avoca Beach</h2>
+            <p className="text-gray-400 mt-3 max-w-xl mx-auto text-sm">Premium systems for coastal residential and hospitality environments that demand quality.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {services.map((s) => (
+              <div key={s.title} className="rounded-xl p-6 border border-[#333] hover:border-[#7B35CC]/40 transition-colors" style={{ background: "#222" }}>
+                <div className="w-1 h-8 rounded-full mb-4" style={{ background: "linear-gradient(180deg, #7B35CC, #F05A28)" }} />
+                <h3 className="font-bold text-white mb-2 text-sm">{s.title}</h3>
+                <p className="text-xs text-gray-400 leading-relaxed mb-4">{s.desc}</p>
+                <Link href={s.href} className="text-xs font-semibold hover:opacity-80 transition-opacity" style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                  Learn more →
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/services/commercial-epoxy-flooring-central-coast"
+              className="text-sm font-semibold hover:opacity-80 transition-opacity"
+              style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+            >
+              View all commercial epoxy flooring Central Coast services →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#1a1a1a" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: "#D4187A" }}>Premium Coastal Systems</p>
+              <h2 className="text-3xl font-bold text-white mb-5">Premium Epoxy Flooring for Avoca Beach</h2>
+              <div className="space-y-4 text-gray-400 text-sm leading-relaxed">
+                <p>Avoca Beach homeowners expect premium finishes — and that&apos;s exactly what we deliver. We use the same commercial-grade multi-layer systems on residential jobs that we install in commercial environments. Not a watered-down garage product, but a proper flooring system built to perform and look the part for years.</p>
+                <p>Coastal UV is intense at Avoca. Polyaspartic UV-stable topcoats are essential for any outdoor application — they prevent the yellowing and chalking that cheaper systems suffer within 2–3 years of coastal sun exposure. We won&apos;t specify a system that won&apos;t last in these conditions.</p>
+                <p>Hospitality venues along the Avoca beachfront strip benefit from our slip-resistant, food-safe commercial systems — built for high foot traffic, daily cleaning, and the demands of a busy venue.</p>
+              </div>
+            </div>
+            <div className="space-y-4">
+              {[
+                { label: "UV-stable coastal systems", sub: "Polyaspartic topcoats that won't yellow" },
+                { label: "Premium residential finishes", sub: "Commercial-grade on every job" },
+                { label: "Hospitality floor specialists", sub: "Food-safe, slip-resistant systems" },
+                { label: "Owner-operated, no subs", sub: "Carl & Santiago on every job" },
+              ].map((s) => (
+                <div key={s.label} className="flex items-center gap-4 p-4 rounded-xl border border-[#333]" style={{ background: "#222" }}>
+                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: "linear-gradient(135deg, #7B35CC, #F05A28)" }} />
+                  <div>
+                    <p className="text-sm font-semibold text-white">{s.label}</p>
+                    <p className="text-xs text-gray-400">{s.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: "#181818" }}>
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-3">Also Serving Nearby Suburbs</h2>
+          <p className="text-gray-400 text-sm mb-8">We service Avoca Beach and surrounding coastal and Central Coast suburbs.</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {nearbyAreas.map((area) => (
+              <span key={area} className="px-4 py-2 rounded-full text-sm text-gray-300 border border-[#333]" style={{ background: "#222" }}>{area}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#1a1a1a" }}>
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-white">Epoxy Flooring Avoca Beach — FAQs</h2>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <details key={faq.q} className="group rounded-xl overflow-hidden border border-[#333]" style={{ background: "#222" }}>
+                <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-semibold text-white hover:bg-[#2a2a2a] transition-colors text-sm">
+                  {faq.q}
+                  <span className="flex-shrink-0 transition-transform group-open:rotate-45 text-gray-400">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 text-gray-400 leading-relaxed text-sm border-t border-[#333] pt-4">{faq.a}</div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <ServicePageForm heading="Get a Free Quote in Avoca Beach" subheading="We'll visit your site, assess the floor, and give you a fixed price. No surprises." />
+    </>
+  );
+}
