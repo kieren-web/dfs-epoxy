@@ -242,6 +242,15 @@ export default function TuggerahEpoxyPage() {
               </div>
             ))}
           </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/services/commercial-epoxy-flooring-central-coast"
+              className="text-sm font-semibold hover:opacity-80 transition-opacity"
+              style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+            >
+              View all commercial epoxy flooring Central Coast services →
+            </Link>
+          </div>
         </div>
       </section>
 

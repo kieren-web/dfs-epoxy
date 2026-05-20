@@ -89,7 +89,7 @@ const services = [
   {
     title: "Workshop & Commercial",
     desc: "Oil-resistant, durable systems for mechanics, trades workshops, and commercial spaces.",
-    href: "/services/commercial-epoxy-flooring-central-coast",
+    href: "/services/workshop-epoxy-flooring-central-coast",
   },
   {
     title: "Garage Epoxy",
@@ -190,6 +190,15 @@ export default function WyongEpoxyPage() {
                 </Link>
               </div>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/services/commercial-epoxy-flooring-central-coast"
+              className="text-sm font-semibold hover:opacity-80 transition-opacity"
+              style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+            >
+              View all commercial epoxy flooring Central Coast services →
+            </Link>
           </div>
         </div>
       </section>

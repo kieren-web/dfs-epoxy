@@ -61,14 +61,14 @@ export default function Hero({ attribution }: HeroProps) {
 
           {/* H1 */}
           <h1 className="hero-h1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold leading-tight tracking-tight mb-5">
-            High-Performance Epoxy Flooring for{" "}
-            <span className="dfs-gradient-text">Commercial & Residential</span>{" "}
-            Environments
+            Epoxy Flooring{" "}
+            <span className="dfs-gradient-text">Central Coast</span>{" "}
+            — Commercial &amp; Residential Specialists
           </h1>
 
           {/* Subheadline */}
           <p className="hero-sub text-lg text-gray-300 max-w-xl mb-7 leading-relaxed">
-            Owner-operated. {FLOORS_INSTALLED} floors installed. Built for warehouses, commercial kitchens, workshops, and garages across the {SERVICE_AREA_PRIMARY}.
+            Owner-operated epoxy flooring on the Central Coast. {FLOORS_INSTALLED} floors installed across warehouses, commercial kitchens, workshops, and garages. Built to last in demanding environments.
           </p>
 
           {/* Bullets */}

@@ -26,7 +26,7 @@ const services = [
   {
     title: "Workshop & Industrial",
     desc: "Oil-resistant, durable systems for mechanics, manufacturing, and trades workshops.",
-    href: "/services/commercial-epoxy-flooring-central-coast",
+    href: "/services/workshop-epoxy-flooring-central-coast",
   },
   {
     title: "Garage Epoxy Flooring",
@@ -193,6 +193,15 @@ export default function GosfordEpoxyPage() {
                 </Link>
               </div>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/services/commercial-epoxy-flooring-central-coast"
+              className="text-sm font-semibold hover:opacity-80 transition-opacity"
+              style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+            >
+              View all commercial epoxy flooring Central Coast services →
+            </Link>
           </div>
         </div>
       </section>

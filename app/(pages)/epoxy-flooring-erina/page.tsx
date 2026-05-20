@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const services = [
   { title: "Commercial & Retail Flooring", desc: "Seamless epoxy for Erina's retail stores, showrooms, and commercial premises. Professional finish, durable underfoot.", href: "/services/commercial-epoxy-flooring-central-coast" },
   { title: "Warehouse & Industrial", desc: "Heavy-duty systems for Erina and Somersby industrial estates. Forklift-rated, chemical-resistant, built for the long term.", href: "/services/warehouse-epoxy-flooring-central-coast" },
-  { title: "Workshop Flooring", desc: "Oil and chemical resistant systems for mechanics and trade workshops throughout the Erina area.", href: "/services/commercial-epoxy-flooring-central-coast" },
+  { title: "Workshop Flooring", desc: "Oil and chemical resistant systems for mechanics and trade workshops throughout the Erina area.", href: "/services/workshop-epoxy-flooring-central-coast" },
   { title: "Garage Epoxy Flooring", desc: "Flake and solid epoxy systems for residential garages in Erina and surrounding suburbs.", href: "/services/garage-epoxy-flooring-central-coast" },
 ];
 
@@ -127,6 +127,15 @@ export default function ErinaEpoxyPage() {
                 </Link>
               </div>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/services/commercial-epoxy-flooring-central-coast"
+              className="text-sm font-semibold hover:opacity-80 transition-opacity"
+              style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+            >
+              View all commercial epoxy flooring Central Coast services →
+            </Link>
           </div>
         </div>
       </section>

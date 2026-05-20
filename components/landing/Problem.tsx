@@ -48,7 +48,7 @@ export default function Problem() {
         </div>
 
         <p className="text-center mt-10 text-base font-semibold dfs-gradient-text">
-          Dynamic Flooring Solutions installs the right system for your environment. Every time. Guaranteed.
+          Dynamic Flooring Solutions — the Central Coast&apos;s epoxy flooring specialists. The right system for your environment. Every time. Guaranteed.
         </p>
       </div>
     </section>

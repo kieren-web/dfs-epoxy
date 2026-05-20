@@ -8,21 +8,25 @@ const COMMERCIAL = [
     title: "Warehouses & Industrial",
     desc: "Heavy-duty seamless systems built for forklifts, pallet jacks, and constant foot traffic. Chemical-resistant, slip-resistant, easy to clean.",
     icon: "🏭",
+    href: "/services/warehouse-epoxy-flooring-central-coast",
   },
   {
     title: "Commercial Kitchens",
     desc: "Hygiene-grade coatings with anti-slip, chemical-resistant surfaces. Meets food safety requirements. Built for hot environments and daily cleaning.",
     icon: "🍳",
+    href: "/services/commercial-kitchen-epoxy-flooring-central-coast",
   },
   {
     title: "Workshops & Mechanics",
     desc: "Hard-wearing systems for mechanics, manufacturing floors, and trade workshops. Oil-resistant, impact-resistant, built to last.",
     icon: "🔧",
+    href: "/services/workshop-epoxy-flooring-central-coast",
   },
   {
     title: "Breweries & Hospitality",
     desc: "Specialist coatings for breweries, bars, and hospitality venues. Slip-resistant, easy to sanitise, built for wet environments.",
     icon: "🍺",
+    href: "/services/commercial-epoxy-flooring-central-coast",
   },
 ];
 
@@ -61,10 +65,10 @@ export default function ServicesGrid() {
             Our Services
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Commercial & Residential Epoxy Experts
+            Epoxy Flooring Services — Central Coast
           </h2>
           <p className="mt-3 text-gray-400 max-w-2xl mx-auto">
-            We specialise in high-traffic commercial environments - but we coat any concrete surface. Garages, patios, driveways, workshops, kitchens, warehouses. If it's concrete, we can help.
+            Commercial epoxy flooring specialists on the Central Coast. We work in warehouses, commercial kitchens, workshops, breweries, and residential garages — any concrete surface, done right.
           </p>
         </div>
 
@@ -89,8 +93,8 @@ export default function ServicesGrid() {
                 <div className="text-3xl mb-3">{s.icon}</div>
                 <h3 className="text-base font-bold text-white mb-2">{s.title}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed mb-4">{s.desc}</p>
-                <Link href="#quote" className="text-sm font-semibold dfs-gradient-text hover:opacity-80 transition-opacity">
-                  Get a Quote →
+                <Link href={s.href} className="text-sm font-semibold dfs-gradient-text hover:opacity-80 transition-opacity">
+                  Learn more →
                 </Link>
               </div>
             ))}

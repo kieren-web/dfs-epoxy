@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const services = [
   { title: "Garage Epoxy Flooring", desc: "Full broadcast flake systems for Woy Woy residential garages. Hot tyre resistant, UV stable, handles coastal moisture.", href: "/services/garage-epoxy-flooring-central-coast" },
   { title: "Driveways & Patios", desc: "Tough outdoor coatings for the peninsula's concrete surfaces. Handles salt air, foot traffic, and coastal UV.", href: "/services/residential-epoxy-flooring-central-coast" },
-  { title: "Workshop & Trade Flooring", desc: "Oil-resistant, hard-wearing epoxy for mechanics and trade workshops on the Woy Woy peninsula.", href: "/services/commercial-epoxy-flooring-central-coast" },
+  { title: "Workshop & Trade Flooring", desc: "Oil-resistant, hard-wearing epoxy for mechanics and trade workshops on the Woy Woy peninsula.", href: "/services/workshop-epoxy-flooring-central-coast" },
   { title: "Commercial Flooring", desc: "Seamless epoxy for retail stores, cafes, and commercial premises across Woy Woy and Umina Beach.", href: "/services/commercial-epoxy-flooring-central-coast" },
 ];
 
@@ -127,6 +127,15 @@ export default function WoyWoyEpoxyPage() {
                 </Link>
               </div>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/services/commercial-epoxy-flooring-central-coast"
+              className="text-sm font-semibold hover:opacity-80 transition-opacity"
+              style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+            >
+              View all commercial epoxy flooring Central Coast services →
+            </Link>
           </div>
         </div>
       </section>
