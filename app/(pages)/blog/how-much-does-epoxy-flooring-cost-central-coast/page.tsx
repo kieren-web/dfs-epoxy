@@ -4,8 +4,8 @@ import ServicePageForm from "@/components/page/ServicePageForm";
 import { SITE_URL, PHONE_NUMBER, PHONE_HREF } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "How Much Does Epoxy Flooring Cost on the Central Coast? [2025]",
-  description: "Transparent epoxy flooring pricing for the Central Coast. Residential garages from $90-$100/m². Commercial priced on inspection. What drives the cost and what to watch out for.",
+  title: "Epoxy Flooring Cost Central Coast 2026 | Prices & What to Expect",
+  description: "Epoxy flooring prices on the Central Coast: garages from $90–$100/m², double garage from $3,200. Commercial quoted on site. What drives cost & what cheap quotes are hiding.",
   alternates: { canonical: `${SITE_URL}/blog/how-much-does-epoxy-flooring-cost-central-coast` },
 };
 

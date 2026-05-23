@@ -16,6 +16,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/services/warehouse-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${SITE_URL}/services/commercial-kitchen-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
 
+    { url: `${SITE_URL}/services/colour-chip-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/services/factory-floor-sealing-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+
     // ── Residential service pages ───────────────────────────────────────────
     { url: `${SITE_URL}/services/residential-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${SITE_URL}/services/garage-epoxy-flooring-central-coast`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },

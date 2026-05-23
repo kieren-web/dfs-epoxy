@@ -6,7 +6,7 @@ import HomePageClient from "./HomePageClient";
 export const metadata: Metadata = {
   title: "Epoxy Flooring Central Coast | Dynamic Flooring Solutions",
   description:
-    "High-performance epoxy flooring systems for warehouses, commercial kitchens, workshops, and garages on the Central Coast NSW. Owner-operated by Carl & Santiago. 500+ floors installed. Free quotes.",
+    "Central Coast epoxy flooring specialists. Warehouses, commercial kitchens, workshops & garages. Owner-operated, 500+ floors installed, from $90/m². Free fixed-price quotes — call 0483 986 101.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Epoxy Flooring Central Coast | Dynamic Flooring Solutions",
