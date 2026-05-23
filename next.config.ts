@@ -30,13 +30,6 @@ const nextConfig: NextConfig = {
         destination: "/blog",
         permanent: true,
       },
-      // www → non-www canonical redirect
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.dynamicflooringsolutions.com.au" }],
-        destination: "https://dynamicflooringsolutions.com.au/:path*",
-        permanent: true,
-      },
     ];
   },
 };
