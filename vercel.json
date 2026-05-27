@@ -3,6 +3,10 @@
     {
       "path": "/api/weekly-report?secret=REPLACE_WITH_CRON_SECRET",
       "schedule": "0 22 * * 0"
+    },
+    {
+      "path": "/api/daily-ranking-check?secret=REPLACE_WITH_CRON_SECRET",
+      "schedule": "0 21 * * *"
     }
   ]
 }
