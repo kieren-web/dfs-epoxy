@@ -4,16 +4,16 @@ import ServicePageForm from "@/components/page/ServicePageForm";
 import { PHONE_NUMBER, PHONE_HREF, SITE_URL } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Colour Chip Flooring Central Coast | Dynamic Flooring Solutions",
+  title: "Colour Chip & Flake Flooring Central Coast | Dynamic Flooring Solutions",
   description:
-    "Colour chip epoxy flooring on the Central Coast. Decorative flake broadcast systems for garages, workshops, showrooms & commercial spaces. Owner-operated, 500+ floors. Free quotes — 0483 986 101.",
+    "Colour chip and flake flooring specialists on the Central Coast. Decorative broadcast flake epoxy systems for garages, workshops, showrooms & commercial spaces. Owner-operated, 500+ floors. Free quotes — 0483 986 101.",
   alternates: { canonical: `${SITE_URL}/services/colour-chip-flooring-central-coast` },
 };
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Colour Chip Flooring Central Coast",
+  name: "Colour Chip & Flake Flooring Central Coast",
   provider: {
     "@type": "LocalBusiness",
     name: "Dynamic Flooring Solutions",
@@ -27,7 +27,7 @@ const schema = {
   },
   areaServed: "Central Coast, NSW",
   description:
-    "Colour chip epoxy flooring specialists on the Central Coast. Decorative broadcast flake systems for residential garages, workshops, showrooms, and commercial spaces.",
+    "Colour chip and flake flooring specialists on the Central Coast. Decorative broadcast flake epoxy systems for residential garages, workshops, showrooms, and commercial spaces.",
 };
 
 const breadcrumbSchema = {
@@ -109,14 +109,14 @@ export default function ColourChipFlooringPage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">
-            Colour Chip Flooring{" "}
+            Colour Chip & Flake Flooring{" "}
             <span style={{ background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Central Coast
             </span>
           </h1>
 
           <p className="text-lg text-gray-400 max-w-2xl mb-6 leading-relaxed">
-            Decorative broadcast flake epoxy systems for garages, workshops, showrooms, and commercial spaces across the Central Coast. Durable, slip-resistant, and available in a wide range of colour combinations. Owner-operated. Free fixed-price quotes.
+            Decorative broadcast flake epoxy flooring for garages, workshops, showrooms, and commercial spaces across the Central Coast. Also called colour chip or flake flooring — durable, slip-resistant, and available in a wide range of colour combinations. Owner-operated. Free fixed-price quotes.
           </p>
 
           <div className="grid sm:grid-cols-3 gap-4 mb-8 max-w-2xl">
@@ -164,11 +164,11 @@ export default function ColourChipFlooringPage() {
                 What Is It
               </p>
               <h2 className="text-3xl font-bold text-white mb-5">
-                What Is Colour Chip Epoxy Flooring?
+                What Is Colour Chip / Flake Flooring?
               </h2>
               <div className="space-y-4 text-gray-400 text-sm leading-relaxed">
                 <p>
-                  Colour chip flooring — also called broadcast flake epoxy or decorative flake flooring — is a multi-layer epoxy system where coloured vinyl chips are broadcast into a wet epoxy base coat, then locked in with a clear polyaspartic or urethane topcoat.
+                  Colour chip flooring — also called flake flooring, broadcast flake epoxy, or decorative flake flooring — is a multi-layer epoxy system where coloured vinyl chips (flakes) are broadcast into a wet epoxy base coat, then locked in with a clear polyaspartic or urethane topcoat.
                 </p>
                 <p>
                   The result is a seamless, professional-looking floor with a speckled, granite-like finish. It hides dirt and minor marks better than plain epoxy, provides a naturally slip-resistant surface from the chip texture, and is available in virtually unlimited colour combinations.
@@ -208,7 +208,7 @@ export default function ColourChipFlooringPage() {
               Applications
             </p>
             <h2 className="text-3xl font-bold text-white">
-              Where We Install Colour Chip Flooring on the Central Coast
+              Where We Install Colour Chip & Flake Flooring on the Central Coast
             </h2>
             <p className="text-gray-400 mt-3 max-w-xl mx-auto text-sm">
               The same broadcast flake system works across a wide range of environments — adapted with the right base coat and topcoat for each application.
@@ -301,7 +301,7 @@ export default function ColourChipFlooringPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#1a1a1a" }}>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-white">Colour Chip Flooring — FAQs</h2>
+            <h2 className="text-3xl font-bold text-white">Colour Chip & Flake Flooring — FAQs</h2>
           </div>
           <div className="space-y-3">
             {faqs.map((faq) => (

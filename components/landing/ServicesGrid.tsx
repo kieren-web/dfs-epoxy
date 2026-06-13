@@ -9,24 +9,28 @@ const COMMERCIAL = [
     desc: "Heavy-duty seamless systems built for forklifts, pallet jacks, and constant foot traffic. Chemical-resistant, slip-resistant, easy to clean.",
     icon: "🏭",
     href: "/services/warehouse-epoxy-flooring-central-coast",
+    linkLabel: "Warehouse Epoxy Flooring →",
   },
   {
     title: "Commercial Kitchens",
     desc: "Hygiene-grade coatings with anti-slip, chemical-resistant surfaces. Meets food safety requirements. Built for hot environments and daily cleaning.",
     icon: "🍳",
     href: "/services/commercial-kitchen-epoxy-flooring-central-coast",
+    linkLabel: "Commercial Kitchen Flooring →",
   },
   {
     title: "Workshops & Mechanics",
     desc: "Hard-wearing systems for mechanics, manufacturing floors, and trade workshops. Oil-resistant, impact-resistant, built to last.",
     icon: "🔧",
     href: "/services/workshop-epoxy-flooring-central-coast",
+    linkLabel: "Workshop Epoxy Flooring →",
   },
   {
     title: "Breweries & Hospitality",
     desc: "Specialist coatings for breweries, bars, and hospitality venues. Slip-resistant, easy to sanitise, built for wet environments.",
     icon: "🍺",
     href: "/services/commercial-epoxy-flooring-central-coast",
+    linkLabel: "Commercial Epoxy Flooring →",
   },
 ];
 
@@ -35,21 +39,29 @@ const RESIDENTIAL = [
     title: "Garages",
     desc: "Durable flake epoxy systems that handle vehicle traffic, oil spills, and hot tyres. Looks great, easy to clean, built to last.",
     icon: "🚗",
+    href: "/services/garage-epoxy-flooring-central-coast",
+    linkLabel: "Garage Epoxy Flooring →",
   },
   {
     title: "Driveways & Patios",
     desc: "Tough outdoor coatings that handle UV, rain, and foot traffic. Transform your outdoor concrete into a clean, durable surface.",
     icon: "🏡",
+    href: "/services/residential-epoxy-flooring-central-coast",
+    linkLabel: "Residential Epoxy Flooring →",
   },
   {
     title: "Interior Floors",
     desc: "Seamless epoxy floors for living areas, showrooms, and studios. Modern finish with lasting durability.",
     icon: "🛋️",
+    href: "/services/residential-epoxy-flooring-central-coast",
+    linkLabel: "Residential Epoxy Flooring →",
   },
   {
-    title: "Any Concrete Surface",
-    desc: "If it's concrete, we can coat it. Not sure if your job qualifies? Give us a call - we'll tell you straight.",
-    icon: "📐",
+    title: "Colour Chip & Flake Flooring",
+    desc: "Decorative broadcast flake epoxy for garages, workshops, and showrooms. Wide colour range, UV stable, slip-resistant.",
+    icon: "🎨",
+    href: "/services/colour-chip-flooring-central-coast",
+    linkLabel: "Colour Chip & Flake Flooring →",
   },
 ];
 
@@ -94,7 +106,7 @@ export default function ServicesGrid() {
                 <h3 className="text-base font-bold text-white mb-2">{s.title}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed mb-4">{s.desc}</p>
                 <Link href={s.href} className="text-sm font-semibold dfs-gradient-text hover:opacity-80 transition-opacity">
-                  Learn more →
+                  {s.linkLabel}
                 </Link>
               </div>
             ))}
@@ -115,8 +127,8 @@ export default function ServicesGrid() {
                 <div className="text-3xl mb-3">{s.icon}</div>
                 <h3 className="text-base font-bold text-white mb-2">{s.title}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed mb-4">{s.desc}</p>
-                <Link href="#quote" className="text-sm font-semibold text-gray-300 hover:text-white transition-colors">
-                  Get a Quote →
+                <Link href={s.href} className="text-sm font-semibold text-gray-300 hover:text-white transition-colors">
+                  {s.linkLabel}
                 </Link>
               </div>
             ))}

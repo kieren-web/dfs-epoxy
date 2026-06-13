@@ -7,10 +7,13 @@ import {
 
 const SERVICES = [
   { label: "Commercial Epoxy Flooring", href: "/services/commercial-epoxy-flooring-central-coast" },
-  { label: "Residential Epoxy Flooring", href: "/services/residential-epoxy-flooring-central-coast" },
-  { label: "Warehouse Flooring", href: "/services/warehouse-epoxy-flooring-central-coast" },
+  { label: "Warehouse Epoxy Flooring", href: "/services/warehouse-epoxy-flooring-central-coast" },
   { label: "Commercial Kitchen Flooring", href: "/services/commercial-kitchen-epoxy-flooring-central-coast" },
   { label: "Garage Epoxy Flooring", href: "/services/garage-epoxy-flooring-central-coast" },
+  { label: "Residential Epoxy Flooring", href: "/services/residential-epoxy-flooring-central-coast" },
+  { label: "Colour Chip & Flake Flooring", href: "/services/colour-chip-flooring-central-coast" },
+  { label: "Non-Slip Floor Coating", href: "/services/non-slip-flooring-central-coast" },
+  { label: "Factory Floor Sealing", href: "/services/factory-floor-sealing-central-coast" },
   { label: "Gallery", href: "/gallery" },
   { label: "Get a Free Quote", href: "/#quote" },
 ];
