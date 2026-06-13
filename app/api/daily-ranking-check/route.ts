@@ -52,7 +52,6 @@ async function getRankings(auth: ReturnType<typeof getOAuthClient>) {
       requestBody: {
         startDate: fmt(startDate), endDate: fmt(endDate),
         dimensions: ["query"], rowLimit: 200,
-        orderBy: [{ fieldName: "impressions", sortOrder: "DESCENDING" }],
       },
     }),
     sc.searchanalytics.query({
