@@ -48,6 +48,7 @@ interface Job {
 interface Extras {
   caulking: { enabled: boolean; price: string };
   tileRemoval: { enabled: boolean; price: string };
+  custom: { enabled: boolean; description: string; price: string };
 }
 
 interface LineItem { description: string; detail?: string; amount: number; }
@@ -78,10 +79,11 @@ function calcLines(job: Job, extras: Extras) {
   const lines: LineItem[] = [];
   const sqm = n(job.sqm);
   const rate = n(job.rate);
+  const systemName = job.isCommercial ? "Megapoxy Flooring System" : "APC Epoxy Flooring System";
 
   if (sqm > 0 && rate > 0) {
     lines.push({
-      description: `APC Epoxy Flooring System${job.projectType ? ` — ${job.projectType}` : ""}`,
+      description: `${systemName}${job.projectType ? ` — ${job.projectType}` : ""}`,
       detail: `${sqm}m² @ $${rate}/m² (incl. diamond grinding, primer coat, 2× epoxy coats, 2× sealers)`,
       amount: sqm * rate,
     });
@@ -95,6 +97,10 @@ function calcLines(job: Job, extras: Extras) {
     lines.push({ description: "Tile Removal & Disposal", amount: n(extras.tileRemoval.price) });
   }
 
+  if (extras.custom.enabled && extras.custom.description && n(extras.custom.price) > 0) {
+    lines.push({ description: extras.custom.description, amount: n(extras.custom.price) });
+  }
+
   const subtotal = lines.reduce((s, l) => s + l.amount, 0);
   const gst = subtotal * 0.1;
   const total = subtotal + gst;
@@ -104,12 +110,25 @@ function calcLines(job: Job, extras: Extras) {
 }
 
 // ─── PDF Generator ────────────────────────────────────────────────────────────
-function generatePDF(customer: Customer, job: Job, extras: Extras) {
+function buildHTML(customer: Customer, job: Job, extras: Extras) {
   const calc = calcLines(job, extras);
   const issueDate = todayStr();
   const validUntil = validityDate(job.validity);
+  const isCommercial = job.isCommercial;
 
-  const scopeItems = [
+  const scopeItems = isCommercial ? [
+    "Full mechanical preparation of concrete substrate via diamond grinding",
+    "Removal of surface contaminants and laitance to ensure proper adhesion",
+    "Repair of cracks, joints, and minor surface defects where required",
+    "Application of Megapoxy primer coat",
+    "Application of Megapoxy epoxy base coat (2 coats)",
+    "Full broadcast of flake system to rejection",
+    "Scrape and vacuum of excess flake",
+    "Application of UV-stable polyaspartic clear topcoat (2 coats)",
+    ...(extras.caulking.enabled ? ["Caulking of wall-floor junctions and expansion joints"] : []),
+    ...(extras.tileRemoval.enabled ? ["Removal and disposal of existing tiles prior to substrate preparation"] : []),
+    ...(extras.custom.enabled && extras.custom.description ? [extras.custom.description] : []),
+  ] : [
     "Full mechanical preparation of concrete substrate via diamond grinding",
     "Removal of surface contaminants and laitance to ensure proper adhesion",
     "Repair of cracks, joints, and minor surface defects where required",
@@ -120,6 +139,7 @@ function generatePDF(customer: Customer, job: Job, extras: Extras) {
     "Application of UV-stable polyaspartic clear topcoat (2 coats)",
     ...(extras.caulking.enabled ? ["Caulking of wall-floor junctions and expansion joints"] : []),
     ...(extras.tileRemoval.enabled ? ["Removal and disposal of existing tiles prior to substrate preparation"] : []),
+    ...(extras.custom.enabled && extras.custom.description ? [extras.custom.description] : []),
   ];
 
   const lineRows = calc.lines.map(l => `
@@ -322,11 +342,33 @@ function generatePDF(customer: Customer, job: Job, extras: Extras) {
 </body>
 </html>`;
 
-  const w = window.open("", "_blank");
-  if (!w) { alert("Allow popups to generate the PDF."); return; }
-  w.document.write(html);
-  w.document.close();
-  setTimeout(() => w.print(), 600);
+  return html;
+}
+
+function generatePDF(customer: Customer, job: Job, extras: Extras) {
+  const html = buildHTML(customer, job, extras);
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const w = window.open(url, "_blank");
+  if (!w) {
+    // Popup blocked — fall back to direct download
+    downloadQuote(customer, job, extras);
+    return;
+  }
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+
+function downloadQuote(customer: Customer, job: Job, extras: Extras) {
+  const html = buildHTML(customer, job, extras);
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `Quote-${job.quoteNumber}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
 }
 
 // ─── UI Helpers ───────────────────────────────────────────────────────────────
@@ -431,6 +473,7 @@ export default function QuoteBuilderClient() {
   const [extras, setExtras] = useState<Extras>({
     caulking: { enabled: false, price: String(DEFAULTS.caulkingPrice) },
     tileRemoval: { enabled: false, price: String(DEFAULTS.tileRemovalPrice) },
+    custom: { enabled: false, description: "", price: "" },
   });
 
   const calc = calcLines(job, extras);
@@ -609,6 +652,16 @@ export default function QuoteBuilderClient() {
         </FieldRow>
       </Toggle>
 
+      <Toggle label="Other / Custom Item" enabled={extras.custom.enabled}
+        onToggle={() => setExtras(p => ({ ...p, custom: { ...p.custom, enabled: !p.custom.enabled } }))}>
+        <FieldRow label="Description">
+          <Input value={extras.custom.description} onChange={v => setExtras(p => ({ ...p, custom: { ...p.custom, description: v } }))} placeholder="e.g. Concrete repairs, Acid wash, etc." />
+        </FieldRow>
+        <FieldRow label="Price ($)">
+          <NumberInput value={extras.custom.price} onChange={v => setExtras(p => ({ ...p, custom: { ...p.custom, price: v } }))} placeholder="0.00" />
+        </FieldRow>
+      </Toggle>
+
       <div className="flex gap-3 mt-6">
         <button type="button" onClick={() => setStep("job")} className="py-3 px-5 rounded-xl text-sm font-bold" style={ghostBtn}>← Back</button>
         <button type="button" onClick={() => setStep("preview")}
@@ -675,8 +728,16 @@ export default function QuoteBuilderClient() {
           onClick={() => generatePDF(customer, job, extras)}
           className="w-full py-4 rounded-xl font-black text-base uppercase tracking-wide disabled:opacity-40"
           style={goldBtn}>
-          Generate PDF / Print Quote
+          Open Quote (Print / Save PDF)
         </button>
+        <button type="button"
+          disabled={calc.lines.length === 0}
+          onClick={() => downloadQuote(customer, job, extras)}
+          className="w-full py-3.5 rounded-xl font-bold text-sm disabled:opacity-40"
+          style={ghostBtn}>
+          Download Quote File
+        </button>
+        <p className="text-xs text-center text-gray-600">On Android: tap Download → open the file → tap ⋮ → Print → Save as PDF</p>
         <button type="button" onClick={() => setStep("extras")}
           className="w-full py-3 rounded-xl text-xs text-gray-600 hover:text-gray-400">
           ← Edit Extras
