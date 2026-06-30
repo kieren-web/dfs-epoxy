@@ -18,7 +18,7 @@ export async function GET() {
     );
     const pipelinesData = await pipelinesRes.json();
     const pipelines: Array<{ id: string; name: string }> = pipelinesData?.pipelines ?? [];
-    const pipeline = pipelines.find(p => p.name.toLowerCase().includes("pre-qual"));
+    const pipeline = pipelines.find(p => /pre[- ]?qual/i.test(p.name));
 
     if (!pipeline) {
       return NextResponse.json(
