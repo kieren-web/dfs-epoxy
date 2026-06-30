@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ─── Business Constants ────────────────────────────────────────────────────────
 const BIZ = {
@@ -24,7 +24,10 @@ const DEFAULTS = {
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Step = "customer" | "job" | "extras" | "preview";
 
+interface GHLContact { id: string; opportunityId?: string; firstName: string; lastName: string; phone: string; email: string; address: string; stageName?: string; }
+
 interface Customer {
+  ghlId?: string;
   firstName: string;
   lastName: string;
   phone: string;
@@ -388,8 +391,31 @@ function Toggle({ label, enabled, onToggle, children }: { label: string; enabled
 export default function QuoteBuilderClient() {
   const [step, setStep] = useState<Step>("customer");
 
+  // GHL contact search
+  const [search, setSearch] = useState("");
+  const [allLeads, setAllLeads] = useState<GHLContact[]>([]);
+  const [leadsLoading, setLeadsLoading] = useState(true);
+  const [leadsError, setLeadsError] = useState("");
+  const [isNewCustomer, setIsNewCustomer] = useState(false);
+
   const [customer, setCustomer] = useState<Customer>({ firstName: "", lastName: "", phone: "", email: "", address: "" });
   const setC = (k: keyof Customer, v: string) => setCustomer(p => ({ ...p, [k]: v }));
+
+  useEffect(() => {
+    fetch("/api/ghl-search-contacts")
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data)) setAllLeads(data);
+        else setLeadsError(data?.error ?? "Failed to load leads");
+      })
+      .catch(() => setLeadsError("Network error"))
+      .finally(() => setLeadsLoading(false));
+  }, []);
+
+  const filteredLeads = search.length < 1 ? allLeads : allLeads.filter(c => {
+    const q = search.toLowerCase();
+    return `${c.firstName} ${c.lastName}`.toLowerCase().includes(q) || c.phone.replace(/\D/g, "").includes(q.replace(/\D/g, ""));
+  });
 
   const [job, setJob] = useState<Job>({
     projectType: "",
@@ -413,20 +439,76 @@ export default function QuoteBuilderClient() {
   const stepCustomer = (
     <div>
       <h2 className="text-lg font-bold text-white mb-1">Who is this quote for?</h2>
-      <p className="text-xs text-gray-500 mb-6">Enter customer details</p>
+      <p className="text-xs text-gray-500 mb-6">Search existing customers or add a new one</p>
 
-      <div className="grid grid-cols-2 gap-3">
-        <FieldRow label="First Name *"><Input value={customer.firstName} onChange={v => setC("firstName", v)} placeholder="First" /></FieldRow>
-        <FieldRow label="Last Name"><Input value={customer.lastName} onChange={v => setC("lastName", v)} placeholder="Last" /></FieldRow>
-      </div>
-      <FieldRow label="Mobile *"><Input value={customer.phone} onChange={v => setC("phone", v)} placeholder="04XX XXX XXX" type="tel" /></FieldRow>
-      <FieldRow label="Email"><Input value={customer.email} onChange={v => setC("email", v)} placeholder="email@example.com" /></FieldRow>
-      <FieldRow label="Job Address"><Input value={customer.address} onChange={v => setC("address", v)} placeholder="123 Example St, Suburb NSW" /></FieldRow>
+      {!isNewCustomer ? (
+        <>
+          <FieldRow label="Pre-Qualified Leads">
+            {leadsLoading ? (
+              <p className="text-xs text-gray-500 py-2">Loading leads from CRM...</p>
+            ) : leadsError ? (
+              <p className="text-xs text-red-400 py-2">{leadsError}</p>
+            ) : (
+              <div>
+                <Input value={search} onChange={setSearch} placeholder={`Search ${allLeads.length} leads by name or phone...`} />
+                <div className="mt-2 rounded-xl overflow-hidden max-h-72 overflow-y-auto" style={{ border: "1px solid #2A2A2A" }}>
+                  {filteredLeads.length === 0 ? (
+                    <p className="text-xs text-gray-600 px-4 py-3">No matches</p>
+                  ) : filteredLeads.map(c => (
+                    <button key={c.id} type="button"
+                      onClick={() => {
+                        setCustomer({ ghlId: c.id, firstName: c.firstName, lastName: c.lastName, phone: c.phone, email: c.email, address: c.address });
+                        setSearch(`${c.firstName} ${c.lastName}`.trim());
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-white/5 transition-colors border-b last:border-b-0"
+                      style={{ borderColor: "#1A1A1A", background: customer.ghlId === c.id ? "#1A0A00" : "transparent" }}>
+                      <div className="text-sm font-semibold text-white">{c.firstName} {c.lastName}</div>
+                      <div className="text-xs text-gray-500">{c.phone}{c.email ? ` · ${c.email}` : ""}{c.stageName ? ` · ${c.stageName}` : ""}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </FieldRow>
+
+          {customer.ghlId && (
+            <div className="rounded-xl p-4 mb-5" style={{ background: "#0D0700", border: `1px solid ${ORANGE}50` }}>
+              <p className="text-xs font-bold mb-1" style={{ color: ORANGE }}>Customer loaded from Pre-Qualified pipeline</p>
+              <p className="text-sm text-white font-semibold">{customer.firstName} {customer.lastName}</p>
+              <p className="text-xs text-gray-400">{customer.phone}{customer.email ? ` · ${customer.email}` : ""}</p>
+              {customer.address && <p className="text-xs text-gray-400">{customer.address}</p>}
+            </div>
+          )}
+
+          <div className="flex items-center gap-3 my-4">
+            <div className="flex-1 h-px" style={{ background: "#222" }} />
+            <span className="text-xs text-gray-600">or</span>
+            <div className="flex-1 h-px" style={{ background: "#222" }} />
+          </div>
+
+          <button type="button"
+            onClick={() => { setIsNewCustomer(true); setCustomer({ firstName: "", lastName: "", phone: "", email: "", address: "" }); }}
+            className="w-full py-3.5 rounded-xl font-bold text-sm" style={ghostBtn}>
+            + New Customer
+          </button>
+        </>
+      ) : (
+        <>
+          <div className="grid grid-cols-2 gap-3">
+            <FieldRow label="First Name *"><Input value={customer.firstName} onChange={v => setC("firstName", v)} placeholder="First" /></FieldRow>
+            <FieldRow label="Last Name"><Input value={customer.lastName} onChange={v => setC("lastName", v)} placeholder="Last" /></FieldRow>
+          </div>
+          <FieldRow label="Mobile *"><Input value={customer.phone} onChange={v => setC("phone", v)} placeholder="04XX XXX XXX" type="tel" /></FieldRow>
+          <FieldRow label="Email"><Input value={customer.email} onChange={v => setC("email", v)} placeholder="email@example.com" /></FieldRow>
+          <FieldRow label="Job Address"><Input value={customer.address} onChange={v => setC("address", v)} placeholder="123 Example St, Suburb NSW" /></FieldRow>
+          <button type="button" onClick={() => setIsNewCustomer(false)} className="text-xs text-gray-600 hover:text-gray-400 mt-1">← Back to search</button>
+        </>
+      )}
 
       <button type="button"
         disabled={!customer.firstName || !customer.phone}
         onClick={() => setStep("job")}
-        className="w-full py-4 rounded-xl font-black text-base uppercase tracking-wide mt-4 disabled:opacity-40"
+        className="w-full py-4 rounded-xl font-black text-base uppercase tracking-wide mt-6 disabled:opacity-40"
         style={goldBtn}>
         Next — Job Details →
       </button>
