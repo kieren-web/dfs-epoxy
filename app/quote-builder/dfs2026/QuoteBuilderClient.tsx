@@ -36,6 +36,7 @@ interface Customer {
 }
 
 interface Job {
+  quoteType: "epoxy" | "dayrate";
   projectType: string;
   isCommercial: boolean;
   sqm: string;
@@ -43,6 +44,10 @@ interface Job {
   colour: string;
   quoteNumber: string;
   validity: "14" | "30";
+  // Day rate fields
+  days: string;
+  ratePerDay: string;
+  dayDescription: string;
 }
 
 interface Extras {
@@ -77,28 +82,39 @@ function defaultQuoteNum() {
 
 function calcLines(job: Job, extras: Extras) {
   const lines: LineItem[] = [];
-  const sqm = n(job.sqm);
-  const rate = n(job.rate);
-  const systemName = job.isCommercial ? "Megapoxy Flooring System" : "APC Epoxy Flooring System";
 
-  if (sqm > 0 && rate > 0) {
-    lines.push({
-      description: `${systemName}${job.projectType ? ` — ${job.projectType}` : ""}`,
-      detail: `${sqm}m² @ $${rate}/m² (incl. diamond grinding, primer coat, 2× epoxy coats, 2× sealers)`,
-      amount: sqm * rate,
-    });
-  }
+  if (job.quoteType === "dayrate") {
+    const days = n(job.days);
+    const rate = n(job.ratePerDay);
+    if (days > 0 && rate > 0) {
+      lines.push({
+        description: `Labour — Day Rate${job.projectType ? ` (${job.projectType})` : ""}`,
+        detail: `${days} day${days !== 1 ? "s" : ""} @ $${fmt(rate)}/day`,
+        amount: days * rate,
+      });
+    }
+  } else {
+    const sqm = n(job.sqm);
+    const rate = n(job.rate);
+    const systemName = job.isCommercial ? "Megapoxy Flooring System" : "APC Epoxy Flooring System";
 
-  if (extras.caulking.enabled && n(extras.caulking.price) > 0) {
-    lines.push({ description: "Caulking", amount: n(extras.caulking.price) });
-  }
+    if (sqm > 0 && rate > 0) {
+      lines.push({
+        description: `${systemName}${job.projectType ? ` — ${job.projectType}` : ""}`,
+        detail: `${sqm}m² @ $${rate}/m² (incl. diamond grinding, primer coat, 2× epoxy coats, 2× sealers)`,
+        amount: sqm * rate,
+      });
+    }
 
-  if (extras.tileRemoval.enabled && n(extras.tileRemoval.price) > 0) {
-    lines.push({ description: "Tile Removal & Disposal", amount: n(extras.tileRemoval.price) });
-  }
-
-  if (extras.custom.enabled && extras.custom.description && n(extras.custom.price) > 0) {
-    lines.push({ description: extras.custom.description, amount: n(extras.custom.price) });
+    if (extras.caulking.enabled && n(extras.caulking.price) > 0) {
+      lines.push({ description: "Caulking", amount: n(extras.caulking.price) });
+    }
+    if (extras.tileRemoval.enabled && n(extras.tileRemoval.price) > 0) {
+      lines.push({ description: "Tile Removal & Disposal", amount: n(extras.tileRemoval.price) });
+    }
+    if (extras.custom.enabled && extras.custom.description && n(extras.custom.price) > 0) {
+      lines.push({ description: extras.custom.description, amount: n(extras.custom.price) });
+    }
   }
 
   const subtotal = lines.reduce((s, l) => s + l.amount, 0);
@@ -114,33 +130,44 @@ function buildHTML(customer: Customer, job: Job, extras: Extras) {
   const calc = calcLines(job, extras);
   const issueDate = todayStr();
   const validUntil = validityDate(job.validity);
+  const isDayRate = job.quoteType === "dayrate";
   const isCommercial = job.isCommercial;
 
-  const scopeItems = isCommercial ? [
-    "Full mechanical preparation of concrete substrate via diamond grinding",
-    "Removal of surface contaminants and laitance to ensure proper adhesion",
-    "Repair of cracks, joints, and minor surface defects where required",
-    "Application of Megapoxy primer coat",
-    "Application of Megapoxy epoxy base coat (2 coats)",
-    "Full broadcast of flake system to rejection",
-    "Scrape and vacuum of excess flake",
-    "Application of UV-stable polyaspartic clear topcoat (2 coats)",
-    ...(extras.caulking.enabled ? ["Caulking of wall-floor junctions and expansion joints"] : []),
-    ...(extras.tileRemoval.enabled ? ["Removal and disposal of existing tiles prior to substrate preparation"] : []),
-    ...(extras.custom.enabled && extras.custom.description ? [extras.custom.description] : []),
-  ] : [
-    "Full mechanical preparation of concrete substrate via diamond grinding",
-    "Removal of surface contaminants and laitance to ensure proper adhesion",
-    "Repair of cracks, joints, and minor surface defects where required",
-    "Application of primer coat",
-    "Application of APC epoxy base coat (2 coats)",
-    "Full broadcast of flake system to rejection",
-    "Scrape and vacuum of excess flake",
-    "Application of UV-stable polyaspartic clear topcoat (2 coats)",
-    ...(extras.caulking.enabled ? ["Caulking of wall-floor junctions and expansion joints"] : []),
-    ...(extras.tileRemoval.enabled ? ["Removal and disposal of existing tiles prior to substrate preparation"] : []),
-    ...(extras.custom.enabled && extras.custom.description ? [extras.custom.description] : []),
-  ];
+  const scopeSection = isDayRate
+    ? `<div class="section-heading">Work Carried Out</div>
+    <div class="scope-box" style="white-space:pre-wrap;font-size:12px;color:#444;line-height:1.7;">${job.dayDescription || "As discussed."}</div>`
+    : (() => {
+        const scopeItems = isCommercial ? [
+          "Full mechanical preparation of concrete substrate via diamond grinding",
+          "Removal of surface contaminants and laitance to ensure proper adhesion",
+          "Repair of cracks, joints, and minor surface defects where required",
+          "Application of Megapoxy primer coat",
+          "Application of Megapoxy epoxy base coat (2 coats)",
+          "Full broadcast of flake system to rejection",
+          "Scrape and vacuum of excess flake",
+          "Application of UV-stable polyaspartic clear topcoat (2 coats)",
+          ...(extras.caulking.enabled ? ["Caulking of wall-floor junctions and expansion joints"] : []),
+          ...(extras.tileRemoval.enabled ? ["Removal and disposal of existing tiles prior to substrate preparation"] : []),
+          ...(extras.custom.enabled && extras.custom.description ? [extras.custom.description] : []),
+        ] : [
+          "Full mechanical preparation of concrete substrate via diamond grinding",
+          "Removal of surface contaminants and laitance to ensure proper adhesion",
+          "Repair of cracks, joints, and minor surface defects where required",
+          "Application of primer coat",
+          "Application of APC epoxy base coat (2 coats)",
+          "Full broadcast of flake system to rejection",
+          "Scrape and vacuum of excess flake",
+          "Application of UV-stable polyaspartic clear topcoat (2 coats)",
+          ...(extras.caulking.enabled ? ["Caulking of wall-floor junctions and expansion joints"] : []),
+          ...(extras.tileRemoval.enabled ? ["Removal and disposal of existing tiles prior to substrate preparation"] : []),
+          ...(extras.custom.enabled && extras.custom.description ? [extras.custom.description] : []),
+        ];
+        return `<div class="section-heading">Scope of Works</div>
+    <div class="scope-box">
+      <ul>${scopeItems.map(s => `<li>${s}</li>`).join("")}</ul>
+      ${job.colour ? `<div class="colour-line">Finished floor colour: ${job.colour}</div>` : ""}
+    </div>`;
+      })();
 
   const lineRows = calc.lines.map(l => `
     <tr>
@@ -153,7 +180,7 @@ function buildHTML(customer: Customer, job: Job, extras: Extras) {
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Quote ${job.quoteNumber} — Dynamic Flooring Solutions</title>
+<title>${isDayRate ? "Invoice" : "Quote"} ${job.quoteNumber} — Dynamic Flooring Solutions</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; background: #fff; font-size: 13px; line-height: 1.55; }
@@ -249,7 +276,7 @@ function buildHTML(customer: Customer, job: Job, extras: Extras) {
       <div style="color:#888;font-size:11px;">${BIZ.phone} &nbsp;·&nbsp; ${BIZ.email}</div>
     </div>
     <div class="quote-meta">
-      <div class="quote-label">Quotation</div>
+      <div class="quote-label">${isDayRate ? "Invoice" : "Quotation"}</div>
       <div class="quote-num">${job.quoteNumber}</div>
       <div class="meta-line">Date: ${issueDate}</div>
       <div class="meta-line">Valid until: ${validUntil}</div>
@@ -275,23 +302,17 @@ function buildHTML(customer: Customer, job: Job, extras: Extras) {
       </div>
     </div>
 
-    <div class="section-heading">Scope of Works</div>
-    <div class="scope-box">
-      <ul>
-        ${scopeItems.map(s => `<li>${s}</li>`).join("")}
-      </ul>
-      ${job.colour ? `<div class="colour-line">Finished floor colour: ${job.colour}</div>` : ""}
-    </div>
+    ${scopeSection}
 
-    <div class="section-heading">System Features</div>
+    ${!isDayRate ? `<div class="section-heading">System Features</div>
     <div class="features">
       <div class="feature">Seamless, hard-wearing finish</div>
       <div class="feature">UV-stable topcoat to reduce yellowing</div>
       <div class="feature">Slip-resistant texture</div>
       <div class="feature">Easy to clean and maintain</div>
-    </div>
+    </div>` : ""}
 
-    <div class="section-heading">Quote Breakdown</div>
+    <div class="section-heading">${isDayRate ? "Invoice Breakdown" : "Quote Breakdown"}</div>
     <table>
       <thead><tr><th>Description</th><th class="amt">Amount (ex. GST)</th></tr></thead>
       <tbody>${lineRows}</tbody>
@@ -305,6 +326,21 @@ function buildHTML(customer: Customer, job: Job, extras: Extras) {
       </table>
     </div>
 
+    ${isDayRate ? `
+    <div class="deposit-box">
+      <div class="dep-title">Payment Details</div>
+      <div class="dep-amount">$${fmt(calc.total)}</div>
+      <div class="bank-grid">
+        <span class="bank-lbl">Account Name</span><span class="bank-val">${BIZ.bankName}</span>
+        <span class="bank-lbl">BSB</span><span class="bank-val">${BIZ.bsb}</span>
+        <span class="bank-lbl">Account No.</span><span class="bank-val">${BIZ.accountNo}</span>
+        <span class="bank-lbl">Reference</span><span class="bank-val">${customer.firstName} ${customer.lastName} — ${job.quoteNumber}</span>
+      </div>
+    </div>
+    <div class="terms">
+      <p>• Payment due within 7 days of invoice date.</p>
+      <p>• This invoice is issued for labour services provided as detailed above.</p>
+    </div>` : `
     <div class="deposit-box">
       <div class="dep-title">30% Deposit Required to Secure Booking</div>
       <div class="dep-amount">$${fmt(calc.deposit)}</div>
@@ -315,7 +351,6 @@ function buildHTML(customer: Customer, job: Job, extras: Extras) {
         <span class="bank-lbl">Reference</span><span class="bank-val">${customer.firstName} ${customer.lastName} — ${job.quoteNumber}</span>
       </div>
     </div>
-
     <div class="exclusions">
       <div class="excl-title">Exclusions</div>
       <ul>
@@ -325,12 +360,11 @@ function buildHTML(customer: Customer, job: Job, extras: Extras) {
         <li>Any works not specifically listed within this quotation</li>
       </ul>
     </div>
-
     <div class="terms">
       <p>• 30% deposit required to secure booking and allocate labour. Balance payable upon completion.</p>
       <p>• This quote is valid for ${job.validity} days from the date of issue (until ${validUntil}).</p>
       <p>• Any unforeseen structural repairs or moisture issues may incur additional costs (to be discussed prior).</p>
-    </div>
+    </div>`}
 
     <div class="sig">
       <div><div class="sig-line">Customer signature &amp; date</div></div>
@@ -412,6 +446,19 @@ function NumberInput({ value, onChange, placeholder }: { value: string; onChange
   );
 }
 
+function Textarea({ value, onChange, placeholder, rows = 5 }: { value: string; onChange: (v: string) => void; placeholder?: string; rows?: number }) {
+  return (
+    <textarea
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      placeholder={placeholder}
+      rows={rows}
+      className="w-full rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 outline-none resize-none"
+      style={{ background: "#111", border: "1px solid #2A2A2A" }}
+    />
+  );
+}
+
 function Toggle({ label, enabled, onToggle, children }: { label: string; enabled: boolean; onToggle: () => void; children?: React.ReactNode }) {
   return (
     <div className="rounded-xl mb-3 overflow-hidden" style={{ border: `1px solid ${enabled ? ORANGE : "#222"}` }}>
@@ -460,6 +507,7 @@ export default function QuoteBuilderClient() {
   });
 
   const [job, setJob] = useState<Job>({
+    quoteType: "epoxy",
     projectType: "",
     isCommercial: false,
     sqm: "",
@@ -467,6 +515,9 @@ export default function QuoteBuilderClient() {
     colour: "",
     quoteNumber: defaultQuoteNum(),
     validity: "14",
+    days: "",
+    ratePerDay: "",
+    dayDescription: "",
   });
   const setJ = (k: keyof Job, v: string | boolean) => setJob(p => ({ ...p, [k]: v }));
 
@@ -486,7 +537,7 @@ export default function QuoteBuilderClient() {
 
       {!isNewCustomer ? (
         <>
-          <FieldRow label="Pre-Qualified Leads">
+          <FieldRow label="Existing Contacts (GHL Pipeline)">
             {leadsLoading ? (
               <p className="text-xs text-gray-500 py-2">Loading leads from CRM...</p>
             ) : leadsError ? (
@@ -559,74 +610,130 @@ export default function QuoteBuilderClient() {
   );
 
   // ── Step: Job ───────────────────────────────────────────────────────────────
+  const isDayRate = job.quoteType === "dayrate";
+  const jobNextDisabled = isDayRate
+    ? (!job.days || !job.ratePerDay || !job.quoteNumber)
+    : (!job.sqm || !job.rate || !job.quoteNumber);
+
   const stepJob = (
     <div>
       <h2 className="text-lg font-bold text-white mb-1">Job Details</h2>
-      <p className="text-xs text-gray-500 mb-6">Enter the flooring scope and pricing</p>
+      <p className="text-xs text-gray-500 mb-6">Select quote type and enter details</p>
 
-      <FieldRow label="Quote Number">
-        <Input value={job.quoteNumber} onChange={v => setJ("quoteNumber", v)} placeholder="e.g. DFS-001" />
-      </FieldRow>
-
-      <FieldRow label="Quote Validity">
+      {/* Quote type */}
+      <FieldRow label="Quote Type">
         <div className="grid grid-cols-2 gap-2">
-          {(["14", "30"] as const).map(d => (
-            <button key={d} type="button"
-              onClick={() => setJ("validity", d)}
+          {[{ v: "epoxy" as const, label: "Epoxy Job" }, { v: "dayrate" as const, label: "Day Rate" }].map(opt => (
+            <button key={opt.v} type="button"
+              onClick={() => setJ("quoteType", opt.v)}
               className="py-3 rounded-xl text-sm font-bold transition-all"
-              style={job.validity === d ? { background: ORANGE, color: "#fff" } : ghostBtn}>
-              {d} Days
-            </button>
-          ))}
-        </div>
-      </FieldRow>
-
-      <FieldRow label="Job Type">
-        <div className="grid grid-cols-2 gap-2 mb-3">
-          {[{ v: false, label: "Residential" }, { v: true, label: "Commercial" }].map(opt => (
-            <button key={String(opt.v)} type="button"
-              onClick={() => {
-                setJ("isCommercial", opt.v);
-                if (!opt.v) setJ("rate", String(DEFAULTS.residentialRate));
-              }}
-              className="py-3 rounded-xl text-sm font-bold transition-all"
-              style={job.isCommercial === opt.v ? { background: ORANGE, color: "#fff" } : ghostBtn}>
+              style={job.quoteType === opt.v ? { background: ORANGE, color: "#fff" } : ghostBtn}>
               {opt.label}
             </button>
           ))}
         </div>
       </FieldRow>
 
-      <FieldRow label="Project Description (free text)">
-        <Input value={job.projectType} onChange={v => setJ("projectType", v)} placeholder="e.g. Garage, Warehouse floor, Balcony" />
+      <FieldRow label={isDayRate ? "Invoice Number" : "Quote Number"}>
+        <Input value={job.quoteNumber} onChange={v => setJ("quoteNumber", v)} placeholder="e.g. DFS-001" />
       </FieldRow>
 
-      <FieldRow label="Floor Area (m²)">
-        <NumberInput value={job.sqm} onChange={v => setJ("sqm", v)} placeholder="e.g. 60" />
-      </FieldRow>
-
-      <FieldRow label={`Rate ($/m²)${!job.isCommercial ? " — default $100" : ""}`}>
-        <NumberInput value={job.rate} onChange={v => setJ("rate", v)} placeholder={job.isCommercial ? "e.g. 200" : "100"} />
-      </FieldRow>
-
-      {n(job.sqm) > 0 && n(job.rate) > 0 && (
-        <div className="rounded-xl p-3 mb-4" style={{ background: "#0D0700", border: `1px solid ${ORANGE}40` }}>
-          <p className="text-xs text-gray-400">Base job total (ex. GST)</p>
-          <p className="text-xl font-black" style={{ color: ORANGE }}>${fmt(n(job.sqm) * n(job.rate))}</p>
-        </div>
+      {!isDayRate && (
+        <FieldRow label="Quote Validity">
+          <div className="grid grid-cols-2 gap-2">
+            {(["14", "30"] as const).map(d => (
+              <button key={d} type="button"
+                onClick={() => setJ("validity", d)}
+                className="py-3 rounded-xl text-sm font-bold transition-all"
+                style={job.validity === d ? { background: ORANGE, color: "#fff" } : ghostBtn}>
+                {d} Days
+              </button>
+            ))}
+          </div>
+        </FieldRow>
       )}
 
-      <FieldRow label="Finish Colour (leave blank if not decided)">
-        <Input value={job.colour} onChange={v => setJ("colour", v)} placeholder="e.g. Grey, Charcoal, Light Stone" />
-      </FieldRow>
+      {isDayRate ? (
+        <>
+          <FieldRow label="Contractor / Company Name (optional)">
+            <Input value={job.projectType} onChange={v => setJ("projectType", v)} placeholder="e.g. ABC Constructions" />
+          </FieldRow>
+
+          <div className="grid grid-cols-2 gap-3">
+            <FieldRow label="Number of Days *">
+              <NumberInput value={job.days} onChange={v => setJ("days", v)} placeholder="e.g. 2" />
+            </FieldRow>
+            <FieldRow label="Rate per Day ($) *">
+              <NumberInput value={job.ratePerDay} onChange={v => setJ("ratePerDay", v)} placeholder="e.g. 800" />
+            </FieldRow>
+          </div>
+
+          {n(job.days) > 0 && n(job.ratePerDay) > 0 && (
+            <div className="rounded-xl p-3 mb-4" style={{ background: "#0D0700", border: `1px solid ${ORANGE}40` }}>
+              <p className="text-xs text-gray-400">Labour total (ex. GST)</p>
+              <p className="text-xl font-black" style={{ color: ORANGE }}>${fmt(n(job.days) * n(job.ratePerDay))}</p>
+            </div>
+          )}
+
+          <FieldRow label="Work Carried Out *">
+            <Textarea
+              value={job.dayDescription}
+              onChange={v => setJ("dayDescription", v)}
+              placeholder={"Describe the work performed, e.g.:\n• Diamond grinding of warehouse floor\n• Application of Megapoxy primer and 2 coats epoxy\n• Final topcoat applied"}
+              rows={6}
+            />
+          </FieldRow>
+        </>
+      ) : (
+        <>
+          <FieldRow label="Job Type">
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              {[{ v: false, label: "Residential" }, { v: true, label: "Commercial" }].map(opt => (
+                <button key={String(opt.v)} type="button"
+                  onClick={() => {
+                    setJ("isCommercial", opt.v);
+                    if (!opt.v) setJ("rate", String(DEFAULTS.residentialRate));
+                  }}
+                  className="py-3 rounded-xl text-sm font-bold transition-all"
+                  style={job.isCommercial === opt.v ? { background: ORANGE, color: "#fff" } : ghostBtn}>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </FieldRow>
+
+          <FieldRow label="Project Description (free text)">
+            <Input value={job.projectType} onChange={v => setJ("projectType", v)} placeholder="e.g. Garage, Warehouse floor, Balcony" />
+          </FieldRow>
+
+          <FieldRow label="Floor Area (m²)">
+            <NumberInput value={job.sqm} onChange={v => setJ("sqm", v)} placeholder="e.g. 60" />
+          </FieldRow>
+
+          <FieldRow label={`Rate ($/m²)${!job.isCommercial ? " — default $100" : ""}`}>
+            <NumberInput value={job.rate} onChange={v => setJ("rate", v)} placeholder={job.isCommercial ? "e.g. 200" : "100"} />
+          </FieldRow>
+
+          {n(job.sqm) > 0 && n(job.rate) > 0 && (
+            <div className="rounded-xl p-3 mb-4" style={{ background: "#0D0700", border: `1px solid ${ORANGE}40` }}>
+              <p className="text-xs text-gray-400">Base job total (ex. GST)</p>
+              <p className="text-xl font-black" style={{ color: ORANGE }}>${fmt(n(job.sqm) * n(job.rate))}</p>
+            </div>
+          )}
+
+          <FieldRow label="Finish Colour (leave blank if not decided)">
+            <Input value={job.colour} onChange={v => setJ("colour", v)} placeholder="e.g. Grey, Charcoal, Light Stone" />
+          </FieldRow>
+        </>
+      )}
 
       <div className="flex gap-3 mt-2">
         <button type="button" onClick={() => setStep("customer")} className="py-3 px-5 rounded-xl text-sm font-bold" style={ghostBtn}>← Back</button>
         <button type="button"
-          disabled={!job.sqm || !job.rate || !job.quoteNumber}
-          onClick={() => setStep("extras")}
+          disabled={jobNextDisabled}
+          onClick={() => setStep(isDayRate ? "preview" : "extras")}
           className="flex-1 py-4 rounded-xl font-black text-base uppercase tracking-wide disabled:opacity-40" style={goldBtn}>
-          Next — Extras →
+          {isDayRate ? "Review Invoice →" : "Next — Extras →"}
         </button>
       </div>
     </div>
@@ -676,7 +783,7 @@ export default function QuoteBuilderClient() {
   const stepPreview = (
     <div>
       <div className="flex items-center justify-between mb-1">
-        <h2 className="text-lg font-bold text-white">Quote Preview</h2>
+        <h2 className="text-lg font-bold text-white">{job.quoteType === "dayrate" ? "Invoice Preview" : "Quote Preview"}</h2>
         <span className="text-xs font-mono" style={{ color: ORANGE }}>{job.quoteNumber}</span>
       </div>
       <p className="text-xs text-gray-500 mb-5">{customer.firstName} {customer.lastName} · {customer.phone}</p>
@@ -715,11 +822,21 @@ export default function QuoteBuilderClient() {
         </div>
       </div>
 
-      {/* Deposit */}
+      {/* Deposit / Payment */}
       <div className="rounded-xl p-4 mb-6" style={{ background: "#0D0700", border: `1px solid ${ORANGE}50` }}>
-        <p className="text-xs text-gray-400 mb-0.5">30% Deposit Required to Secure Booking</p>
-        <p className="text-2xl font-black" style={{ color: ORANGE }}>${fmt(calc.deposit)}</p>
-        <p className="text-xs text-gray-600 mt-1">BSB {BIZ.bsb} &nbsp;·&nbsp; Acc {BIZ.accountNo}</p>
+        {job.quoteType === "dayrate" ? (
+          <>
+            <p className="text-xs text-gray-400 mb-0.5">Total Due (incl. GST)</p>
+            <p className="text-2xl font-black" style={{ color: ORANGE }}>${fmt(calc.total)}</p>
+            <p className="text-xs text-gray-600 mt-1">BSB {BIZ.bsb} &nbsp;·&nbsp; Acc {BIZ.accountNo} &nbsp;·&nbsp; Due within 7 days</p>
+          </>
+        ) : (
+          <>
+            <p className="text-xs text-gray-400 mb-0.5">30% Deposit Required to Secure Booking</p>
+            <p className="text-2xl font-black" style={{ color: ORANGE }}>${fmt(calc.deposit)}</p>
+            <p className="text-xs text-gray-600 mt-1">BSB {BIZ.bsb} &nbsp;·&nbsp; Acc {BIZ.accountNo}</p>
+          </>
+        )}
       </div>
 
       <div className="space-y-3">
@@ -738,21 +855,24 @@ export default function QuoteBuilderClient() {
           Download Quote File
         </button>
         <p className="text-xs text-center text-gray-600">On Android: tap Download → open the file → tap ⋮ → Print → Save as PDF</p>
-        <button type="button" onClick={() => setStep("extras")}
+        <button type="button" onClick={() => setStep(job.quoteType === "dayrate" ? "job" : "extras")}
           className="w-full py-3 rounded-xl text-xs text-gray-600 hover:text-gray-400">
-          ← Edit Extras
+          ← {job.quoteType === "dayrate" ? "Edit Details" : "Edit Extras"}
         </button>
       </div>
     </div>
   );
 
   // ─── Step Indicator ──────────────────────────────────────────────────────────
-  const steps: { key: Step; label: string }[] = [
+  const allSteps: { key: Step; label: string }[] = [
     { key: "customer", label: "Customer" },
     { key: "job", label: "Job" },
     { key: "extras", label: "Extras" },
-    { key: "preview", label: "Quote" },
+    { key: "preview", label: job.quoteType === "dayrate" ? "Invoice" : "Quote" },
   ];
+  const steps = job.quoteType === "dayrate"
+    ? allSteps.filter(s => s.key !== "extras")
+    : allSteps;
   const stepIndex = steps.findIndex(s => s.key === step);
 
   return (
