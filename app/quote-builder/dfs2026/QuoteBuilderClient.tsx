@@ -405,6 +405,37 @@ function downloadQuote(customer: Customer, job: Job, extras: Extras) {
   setTimeout(() => URL.revokeObjectURL(url), 10000);
 }
 
+// ─── Local Storage ────────────────────────────────────────────────────────────
+const LOCAL_KEY = "dfs-qb-recent";
+const MAX_RECENT = 20;
+
+interface LocalContact { localId: string; savedAt: number; firstName: string; lastName: string; phone: string; email: string; address: string; }
+
+function loadLocalContacts(): LocalContact[] {
+  try {
+    const raw = typeof window !== "undefined" ? localStorage.getItem(LOCAL_KEY) : null;
+    return raw ? (JSON.parse(raw) as LocalContact[]) : [];
+  } catch { return []; }
+}
+
+function saveLocalContact(customer: Customer) {
+  if (!customer.firstName || !customer.phone) return;
+  try {
+    const existing = loadLocalContacts().filter(c => c.phone.replace(/\D/g,"") !== customer.phone.replace(/\D/g,""));
+    const entry: LocalContact = {
+      localId: `local-${Date.now()}`,
+      savedAt: Date.now(),
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      phone: customer.phone,
+      email: customer.email,
+      address: customer.address,
+    };
+    const updated = [entry, ...existing].slice(0, MAX_RECENT);
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(updated));
+  } catch {}
+}
+
 // ─── UI Helpers ───────────────────────────────────────────────────────────────
 const ORANGE = "#F05A28";
 const goldBtn: React.CSSProperties = { background: "linear-gradient(135deg, #7B35CC, #D4187A, #F05A28)", color: "#fff" };
@@ -486,11 +517,13 @@ export default function QuoteBuilderClient() {
   const [leadsLoading, setLeadsLoading] = useState(true);
   const [leadsError, setLeadsError] = useState("");
   const [isNewCustomer, setIsNewCustomer] = useState(false);
+  const [localContacts, setLocalContacts] = useState<LocalContact[]>([]);
 
   const [customer, setCustomer] = useState<Customer>({ firstName: "", lastName: "", phone: "", email: "", address: "" });
   const setC = (k: keyof Customer, v: string) => setCustomer(p => ({ ...p, [k]: v }));
 
   useEffect(() => {
+    setLocalContacts(loadLocalContacts());
     fetch("/api/ghl-search-contacts")
       .then(r => r.json())
       .then(data => {
@@ -502,6 +535,12 @@ export default function QuoteBuilderClient() {
   }, []);
 
   const filteredLeads = search.length < 1 ? allLeads : allLeads.filter(c => {
+    const q = search.toLowerCase();
+    return `${c.firstName} ${c.lastName}`.toLowerCase().includes(q) || c.phone.replace(/\D/g, "").includes(q.replace(/\D/g, ""));
+  });
+
+  const filteredLocal = localContacts.filter(c => {
+    if (search.length < 1) return true;
     const q = search.toLowerCase();
     return `${c.firstName} ${c.lastName}`.toLowerCase().includes(q) || c.phone.replace(/\D/g, "").includes(q.replace(/\D/g, ""));
   });
@@ -574,6 +613,25 @@ export default function QuoteBuilderClient() {
             </div>
           )}
 
+          {filteredLocal.length > 0 && (
+            <FieldRow label={`Recently Quoted (${localContacts.length})`}>
+              <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #2A2A2A" }}>
+                {filteredLocal.map(c => (
+                  <button key={c.localId} type="button"
+                    onClick={() => {
+                      setCustomer({ firstName: c.firstName, lastName: c.lastName, phone: c.phone, email: c.email, address: c.address });
+                      setSearch(`${c.firstName} ${c.lastName}`.trim());
+                    }}
+                    className="w-full text-left px-4 py-3 hover:bg-white/5 transition-colors border-b last:border-b-0"
+                    style={{ borderColor: "#1A1A1A", background: (!customer.ghlId && customer.phone === c.phone) ? "#1A0A00" : "transparent" }}>
+                    <div className="text-sm font-semibold text-white">{c.firstName} {c.lastName}</div>
+                    <div className="text-xs text-gray-500">{c.phone}{c.email ? ` · ${c.email}` : ""}</div>
+                  </button>
+                ))}
+              </div>
+            </FieldRow>
+          )}
+
           <div className="flex items-center gap-3 my-4">
             <div className="flex-1 h-px" style={{ background: "#222" }} />
             <span className="text-xs text-gray-600">or</span>
@@ -601,7 +659,13 @@ export default function QuoteBuilderClient() {
 
       <button type="button"
         disabled={!customer.firstName || !customer.phone}
-        onClick={() => setStep("job")}
+        onClick={() => {
+          if (isNewCustomer) {
+            saveLocalContact(customer);
+            setLocalContacts(loadLocalContacts());
+          }
+          setStep("job");
+        }}
         className="w-full py-4 rounded-xl font-black text-base uppercase tracking-wide mt-6 disabled:opacity-40"
         style={goldBtn}>
         Next — Job Details →
