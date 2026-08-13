@@ -77,7 +77,8 @@ function defaultQuoteNum() {
   const yy = String(d.getFullYear()).slice(2);
   const mm = String(d.getMonth() + 1).padStart(2, "0");
   const dd = String(d.getDate()).padStart(2, "0");
-  return `DFS-${yy}${mm}${dd}`;
+  const rand = Math.random().toString(36).slice(2, 5).toUpperCase();
+  return `DFS-${yy}${mm}${dd}-${rand}`;
 }
 
 function calcLines(job: Job, extras: Extras) {
@@ -568,6 +569,61 @@ export default function QuoteBuilderClient() {
 
   const calc = calcLines(job, extras);
 
+  const [emailing, setEmailing] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [showQuotePreview, setShowQuotePreview] = useState(false);
+
+  function resetAll() {
+    setStep("customer");
+    setCustomer({ firstName: "", lastName: "", phone: "", email: "", address: "" });
+    setIsNewCustomer(false);
+    setSearch("");
+    setJob({
+      quoteType: "epoxy",
+      projectType: "",
+      isCommercial: false,
+      sqm: "",
+      rate: String(DEFAULTS.residentialRate),
+      colour: "",
+      quoteNumber: defaultQuoteNum(),
+      validity: "14",
+      days: "",
+      ratePerDay: "",
+      dayDescription: "",
+    });
+    setExtras({
+      caulking: { enabled: false, price: String(DEFAULTS.caulkingPrice) },
+      tileRemoval: { enabled: false, price: String(DEFAULTS.tileRemovalPrice) },
+      custom: { enabled: false, description: "", price: "" },
+    });
+    setEmailSent(false);
+    setEmailing(false);
+    setShowQuotePreview(false);
+  }
+
+  async function sendQuoteEmail() {
+    if (!customer.email) return;
+    setEmailing(true);
+    try {
+      const res = await fetch("/api/send-quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          html: buildHTML(customer, job, extras),
+          quoteNumber: job.quoteNumber,
+          customerName: `${customer.firstName} ${customer.lastName}`,
+          customerEmail: customer.email,
+        }),
+      });
+      if (res.ok) {
+        setEmailSent(true);
+        setShowQuotePreview(false);
+      }
+    } finally {
+      setEmailing(false);
+    }
+  }
+
   // ── Step: Customer ──────────────────────────────────────────────────────────
   const stepCustomer = (
     <div>
@@ -903,12 +959,53 @@ export default function QuoteBuilderClient() {
         )}
       </div>
 
+      {/* Email sent success */}
+      {emailSent && (
+        <div className="rounded-xl p-4 mb-4" style={{ background: "#001400", border: "1px solid #004000" }}>
+          <p className="text-sm font-bold text-green-400 mb-0.5">✓ Quote sent to {customer.email}</p>
+          <p className="text-xs text-gray-500">Carl has been BCC&apos;d — replies go to him directly.</p>
+        </div>
+      )}
+
       <div className="space-y-3">
+        {/* New Quote — shown after sending */}
+        {emailSent && (
+          <button type="button" onClick={resetAll}
+            className="w-full py-4 rounded-xl font-black text-base uppercase tracking-wide"
+            style={goldBtn}>
+            + New Quote
+          </button>
+        )}
+
+        {/* Preview full quote */}
+        <button type="button"
+          disabled={calc.lines.length === 0}
+          onClick={() => setShowQuotePreview(true)}
+          className="w-full py-3.5 rounded-xl font-bold text-sm disabled:opacity-40"
+          style={ghostBtn}>
+          👁 Preview Full Quote
+        </button>
+
+        {/* Send to customer */}
+        {customer.email ? (
+          <button type="button"
+            disabled={emailing || calc.lines.length === 0}
+            onClick={sendQuoteEmail}
+            className="w-full py-4 rounded-xl font-black text-base uppercase tracking-wide disabled:opacity-50"
+            style={goldBtn}>
+            {emailing ? "Sending..." : emailSent ? `✓ Sent to ${customer.email}` : `Send Quote to ${customer.email}`}
+          </button>
+        ) : (
+          <div className="w-full py-4 rounded-xl text-center text-sm text-gray-500" style={{ border: "1px solid #333" }}>
+            No email on file — add email in customer step to send
+          </div>
+        )}
+
         <button type="button"
           disabled={calc.lines.length === 0}
           onClick={() => generatePDF(customer, job, extras)}
-          className="w-full py-4 rounded-xl font-black text-base uppercase tracking-wide disabled:opacity-40"
-          style={goldBtn}>
+          className="w-full py-3.5 rounded-xl font-bold text-sm disabled:opacity-40"
+          style={ghostBtn}>
           Open Quote (Print / Save PDF)
         </button>
         <button type="button"
@@ -975,6 +1072,41 @@ export default function QuoteBuilderClient() {
         {step === "extras" && stepExtras}
         {step === "preview" && stepPreview}
       </div>
+
+      {/* Full quote preview modal */}
+      {showQuotePreview && (
+        <div className="fixed inset-0 z-50 flex flex-col" style={{ background: "rgba(0,0,0,0.97)" }}>
+          <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: "#111", borderBottom: "1px solid #2A2A2A" }}>
+            <div>
+              <p className="text-white font-black text-sm">{job.quoteType === "dayrate" ? "Invoice" : "Quote"} — {job.quoteNumber}</p>
+              <p className="text-xs text-gray-500">{customer.firstName} {customer.lastName}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              {customer.email && (
+                <button type="button"
+                  onClick={sendQuoteEmail}
+                  disabled={emailing}
+                  className="py-2 px-4 rounded-xl font-black text-sm uppercase tracking-wide disabled:opacity-50"
+                  style={goldBtn}>
+                  {emailing ? "Sending..." : `Send to ${customer.firstName}`}
+                </button>
+              )}
+              <button type="button" onClick={() => setShowQuotePreview(false)}
+                className="py-2 px-3 rounded-xl text-sm font-bold" style={ghostBtn}>
+                Close
+              </button>
+            </div>
+          </div>
+          <div className="flex-1 overflow-hidden">
+            <iframe
+              srcDoc={buildHTML(customer, job, extras)}
+              className="w-full h-full"
+              style={{ border: "none", background: "#fff" }}
+              title="Quote Preview"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
