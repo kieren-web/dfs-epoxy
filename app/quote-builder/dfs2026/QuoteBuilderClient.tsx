@@ -7,7 +7,7 @@ const BIZ = {
   abn: "88 679 629 522",
   address: "122 Vales Road, Mannering Park NSW 2259",
   phone: "0447 023 477",
-  email: "cs@dynamicflooringsolution.com.au",
+  email: "csflooringaustralia@gmail.com",
   preparedBy: "Carl Fletcher",
   bankName: "Dynamic Flooring Solutions",
   bsb: "082 677",
