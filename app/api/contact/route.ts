@@ -108,11 +108,15 @@ export async function POST(req: NextRequest) {
       body.device       ? `Device: ${body.device}`              : null,
     ].filter(Boolean).join("\n");
 
-    await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
+    const noteRes = await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
       method: "POST",
       headers: ghlHeaders,
       body: JSON.stringify({ body: noteLines }),
     });
+    if (!noteRes.ok) {
+      const noteErr = await noteRes.json().catch(() => null);
+      console.error("[DFS] Note creation failed:", noteRes.status, JSON.stringify(noteErr));
+    }
 
     // ── Step 3: Remove website-enquiry tag (ignore errors) ───────────────────
     await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/tags`, {
