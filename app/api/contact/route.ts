@@ -94,17 +94,11 @@ export async function POST(req: NextRequest) {
 
     // ── Step 2: Add note with full lead details ───────────────────────────────
     const noteLines = [
-      `📋 New Lead — DFS Website`,
-      ``,
-      `Name: ${body.first_name} ${body.last_name}`,
-      `Phone: ${body.mobile}`,
-      `Email: ${body.email}`,
-      ``,
+      `Source: DFS Website`,
       `Service: ${body.service}`,
       body.floor_size  ? `Floor size: ${body.floor_size}`       : null,
       `Suburb: ${body.suburb}`,
       `Best time to call: ${body.best_time || "ASAP"}`,
-      ``,
       body.utm_source   ? `UTM Source: ${body.utm_source}`      : null,
       body.utm_medium   ? `UTM Medium: ${body.utm_medium}`      : null,
       body.utm_campaign ? `UTM Campaign: ${body.utm_campaign}`  : null,
@@ -112,7 +106,7 @@ export async function POST(req: NextRequest) {
       body.landing_path ? `Landing page: ${body.landing_path}`  : null,
       body.referrer     ? `Referrer: ${body.referrer}`          : null,
       body.device       ? `Device: ${body.device}`              : null,
-    ].filter(line => line !== null).join("\n");
+    ].filter(Boolean).join("\n");
 
     await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
       method: "POST",
